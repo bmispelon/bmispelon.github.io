@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>How the Sausage is Made</title>
+<style type="text/css">
+
+.hll { background-color: #ffffcc }
+.c { color: #228B22 } /* Comment */
+.err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.k { color: #8B008B; font-weight: bold } /* Keyword */
+.cm { color: #228B22 } /* Comment.Multiline */
+.cp { color: #1e889b } /* Comment.Preproc */
+.c1 { color: #228B22 } /* Comment.Single */
+.cs { color: #8B008B; font-weight: bold } /* Comment.Special */
+.gd { color: #aa0000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #aa0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00aa00 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #555555 } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #aa0000 } /* Generic.Traceback */
+.kc { color: #8B008B; font-weight: bold } /* Keyword.Constant */
+.kd { color: #8B008B; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #8B008B; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #8B008B; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #8B008B; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #a7a7a7; font-weight: bold } /* Keyword.Type */
+.m { color: #B452CD } /* Literal.Number */
+.s { color: #CD5555 } /* Literal.String */
+.na { color: #658b00 } /* Name.Attribute */
+.nb { color: #658b00 } /* Name.Builtin */
+.nc { color: #008b45; font-weight: bold } /* Name.Class */
+.no { color: #00688B } /* Name.Constant */
+.nd { color: #707a7c } /* Name.Decorator */
+.ne { color: #008b45; font-weight: bold } /* Name.Exception */
+.nf { color: #008b45 } /* Name.Function */
+.nn { color: #008b45; text-decoration: underline } /* Name.Namespace */
+.nt { color: #8B008B; font-weight: bold } /* Name.Tag */
+.nv { color: #00688B } /* Name.Variable */
+.ow { color: #8B008B } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #B452CD } /* Literal.Number.Float */
+.mh { color: #B452CD } /* Literal.Number.Hex */
+.mi { color: #B452CD } /* Literal.Number.Integer */
+.mo { color: #B452CD } /* Literal.Number.Oct */
+.sb { color: #CD5555 } /* Literal.String.Backtick */
+.sc { color: #CD5555 } /* Literal.String.Char */
+.sd { color: #CD5555 } /* Literal.String.Doc */
+.s2 { color: #CD5555 } /* Literal.String.Double */
+.se { color: #CD5555 } /* Literal.String.Escape */
+.sh { color: #1c7e71; font-style: italic } /* Literal.String.Heredoc */
+.si { color: #CD5555 } /* Literal.String.Interpol */
+.sx { color: #cb6c20 } /* Literal.String.Other */
+.sr { color: #1c7e71 } /* Literal.String.Regex */
+.s1 { color: #CD5555 } /* Literal.String.Single */
+.ss { color: #CD5555 } /* Literal.String.Symbol */
+.bp { color: #658b00 } /* Name.Builtin.Pseudo */
+.vc { color: #00688B } /* Name.Variable.Class */
+.vg { color: #00688B } /* Name.Variable.Global */
+.vi { color: #00688B } /* Name.Variable.Instance */
+.il { color: #B452CD } /* Literal.Number.Integer.Long */
+
+</style>
+<style type="text/css">
+
+.floatleft {
+    float: left;
+    margin-right: 4%;
+}
+.fullheight {
+    /* For a page height of 768px */
+    /* height: 632px; */
+    height: 2000px;
+}
+.strike {
+    text-decoration: line-through;
+}
+.external:after {
+    content: "" !important; /* Remove stuff after <a> */
+}
+
+.current {
+    color: #000 !important;
+}
+
+strong {
+    color: #092E20;
+}
+
+#slide0 {
+    background: #092E20;
+    color: #fff;
+}
+#slide0 .container {
+    /* For a page height of 768px */
+    /* height: 412px; */
+}
+
+/* XXX: adjust according to final Y resolution */
+#what-is-django img {height: 550px;}
+#how-is-django-developed img {height: 550px;}
+#how-to-contribute img {height: 550px;}
+
+#what-is-django,
+#how-is-django-developed,
+#how-to-contribute,
+#dziekuje {
+    background: #092E20;
+    color: #fff;
+    text-align: center;
+}
+
+#the-dsf strong {
+    font-size: 150%;
+}
+
+#the-core-team img,
+#django-dashboard img {
+    width: 100%;
+}
+
+#mailing-lists span.pre {
+    color: #092E20;
+    font-weight: bold;
+}
+
+#dziekuje .container {
+    font-size: 400%;
+}
+
+#bonus-my-merge-workflow pre {
+    font-size: 70%;
+}
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/medium-white/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/medium-white/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/medium-white/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/medium-white/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/medium-white/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>How the Sausage is Made</h1>
+
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">How the Sausage is Made</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<div class="fullheight container">
+Looking at Django's development process from the inside.</div>
+
+</div>
+<div class="slide" id="about-me">
+<h1>About me</h1>
+<img alt="baptiste.jpg" class="floatleft" src="baptiste.jpg" />
+<p><strong>Baptiste Mispelon</strong></p>
+<p>Online: <tt class="docutils literal">bmispelon</tt></p>
+<p>Web developer</p>
+<p>Django core dev since June 2013</p>
+</div>
+<div class="slide" id="about-this-talk">
+<h1>About this talk</h1>
+<p>Three parts:</p>
+<ol class="arabic simple">
+<li>What is Django?</li>
+<li>How is Django developed?</li>
+<li>How to contribute?</li>
+</ol>
+</div>
+<div class="slide" id="what-is-django">
+<h1>1 - What is Django?</h1>
+<div class="fullheight container">
+<img alt="django-pony.png" class="center" src="django-pony.png" />
+</div>
+</div>
+<div class="slide" id="the-framework">
+<h1>The framework</h1>
+<p><em>&quot;The web framework for perfectionists with deadlines&quot;</em></p>
+<ul class="incremental simple">
+<li>Written in Python</li>
+<li>Batteries included: ORM, template language, ...</li>
+<li>MIT license</li>
+<li>Supports Python 3 and 2</li>
+</ul>
+</div>
+<div class="slide" id="history">
+<h1>History</h1>
+<ul class="incremental simple">
+<li>Started in <strong>2003</strong> at World Online, web division of LJW (US newspaper).</li>
+<li>Opensourced in July <strong>2005</strong>.</li>
+<li><tt class="docutils literal">1.0</tt> release in September <strong>2008</strong>.</li>
+<li>Currently at <strong>1.6</strong>, with <strong>1.7</strong> in beta.</li>
+</ul>
+</div>
+<div class="slide" id="the-dsf">
+<h1>The DSF</h1>
+<p><strong>D</strong>jango <strong>S</strong>oftware <strong>F</strong>oundation</p>
+<ul class="incremental simple">
+<li>Created in 2008</li>
+<li>US-based non-profit organization</li>
+<li>Funded by corporate members and donations</li>
+</ul>
+</div>
+<div class="slide" id="the-dsf-s-activity">
+<h1>The DSF's activity</h1>
+<ul class="incremental simple">
+<li>Holds the Django trademark</li>
+<li>Helps sponsor sprints, meetups, ...</li>
+<li>Awards (Malcolm Tredinnick memorial prize)</li>
+</ul>
+</div>
+<div class="slide" id="the-core-team">
+<h1>The core team</h1>
+<img alt="core_team.jpg" class="incremental" src="core_team.jpg" />
+</div>
+<div class="slide" id="id1">
+<h1>The core team</h1>
+<p>Core team == People with commit access.</p>
+<ul class="incremental simple">
+<li>44 people, 16 countries, 3 continents</li>
+<li>All volunteers, no one is paid</li>
+</ul>
+</div>
+<div class="slide" id="core-team-s-activity">
+<h1>Core team's activity</h1>
+<ul class="incremental">
+<li><p class="first">Free time vary so people come and go</p>
+</li>
+<li><dl class="first docutils">
+<dt>Active core devs (by commit):</dt>
+<dd><ul class="first last simple">
+<li>this week: 9</li>
+<li>this month: 17</li>
+<li>this year: 32</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="slide" id="perks">
+<h1>Perks</h1>
+<ul class="incremental simple">
+<li>Commit access (really scary)</li>
+<li>Internal mailing list (not very active)</li>
+<li>Private repository (to work on security issues)</li>
+<li>Access to a private Django jet</li>
+</ul>
+</div>
+<div class="slide" id="id2">
+<h1>Perks</h1>
+<ul class="simple">
+<li>Commit access (really scary)</li>
+<li>Internal mailing list (not very active)</li>
+<li>Private repository (to work on security issues)</li>
+<li><span class="strike">Access to a private Django jet</span></li>
+<li><strong>That's basically all</strong></li>
+</ul>
+</div>
+<div class="slide" id="how-to-join-the-core-team">
+<h1>How to join the core team?</h1>
+<ul class="incremental simple">
+<li>Don't ask for it</li>
+<li>Quality contributions</li>
+<li>Long-term involvement</li>
+<li>Existing core dev submits name for approval. One week voting period. +1/-1</li>
+</ul>
+</div>
+<div class="slide" id="the-community">
+<h1>The community</h1>
+<p>Django's most valuable asset.</p>
+</div>
+<div class="slide" id="code-contributions">
+<h1>Code contributions</h1>
+<p>We have 10 times as many external contributors as core devs:</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>git log --format<span class="o">=</span>%an <span class="se">\
+</span>    | sort -u <span class="se">\
+</span>    | wc -l
+584
+</pre>
+</div>
+<div class="slide" id="ecosystem">
+<h1>Ecosystem</h1>
+<p>There's a huge wealth of reusable applications:</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>pip search django <span class="se">\
+</span>    | grep ^django- <span class="se">\
+</span>    | wc -l
+4061
+</pre>
+</div>
+<div class="slide" id="community-events">
+<h1>Community events</h1>
+<p>Conferences all over the world:</p>
+<p>USA, Europe, Australia,
+Wales, Italy, ...</p>
+<p>There are also regular meetups everywhere.</p>
+<p>Not to mention all Python-related events.</p>
+</div>
+<div class="slide" id="how-is-django-developed">
+<h1>2 - How is Django developed?</h1>
+<div class="fullheight container">
+<img alt="pony_factory.png" class="center" src="pony_factory.png" />
+</div>
+</div>
+<div class="slide" id="release-process">
+<h1>Release process</h1>
+<ul class="incremental simple">
+<li>New release about every 6 months</li>
+<li>Alpha (4 months), Beta (2 months), RC (2 weeks), Final</li>
+<li>Micro release for bugfix/security</li>
+<li><strong>L</strong>ong-<strong>T</strong>erm <strong>S</strong>upport</li>
+<li>Backwards-compatibility policy</li>
+</ul>
+</div>
+<div class="slide" id="git-github">
+<h1>Git / Github</h1>
+<ul class="incremental simple">
+<li>Django started with Subversion but moved to Git in April 2012</li>
+<li>~17 000 commits</li>
+<li><a class="reference external" href="https://github.com/django/django">github.com/django/django</a></li>
+<li>No issues, no wiki</li>
+<li>Pull requests (2500 opened)</li>
+</ul>
+</div>
+<div class="slide" id="trac">
+<h1>Trac</h1>
+<ul class="incremental simple">
+<li>Bug tracking software written in Python</li>
+<li>Used since the beginning of the project</li>
+<li>Central to the development of Django</li>
+<li>More than 22 000 issues</li>
+<li>Intimidating but powerful</li>
+<li><strong>Don't use it for security reports!</strong></li>
+</ul>
+</div>
+<div class="slide" id="protip-the-django-dashboard">
+<h1>Protip: the Django dashboard</h1>
+<p><a class="reference external" href="https://dashboard.djangoproject.com">https://dashboard.djangoproject.com</a></p>
+<p>Pretty graphs, useful shortcuts to trac.</p>
+</div>
+<div class="slide" id="django-dashboard">
+<h1>Django dashboard</h1>
+<img alt="Django_dashboard.png" src="Django_dashboard.png" />
+</div>
+<div class="slide" id="mailing-lists">
+<h1>Mailing lists</h1>
+<p>Big features are discussed on <tt class="docutils literal"><span class="pre">django-developers</span></tt>.</p>
+<p>Someone comes with a proposal and people discuss it, gathering feedback.</p>
+<p>The goal is to reach a consensus from which we can start building.</p>
+</div>
+<div class="slide" id="other-official-mailing-lists">
+<h1>Other official mailing lists</h1>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">django-users</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django-core-mentorship</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django-i18n</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django-announce</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django-updates</span></tt></li>
+</ul>
+</div>
+<div class="slide" id="internationalization">
+<h1>Internationalization</h1>
+<p>Django is translated in 81 languages:</p>
+<ul class="incremental simple">
+<li>Translation work is done on <a class="reference external" href="https://www.transifex.com/projects/p/django-core/">Transifex</a></li>
+<li>Anybody is welcome to contribute (you need to create an account and join a language team)</li>
+<li>Experimental: Translation of the documentation (French, Japanese)</li>
+</ul>
+</div>
+<div class="slide" id="translation-process">
+<h1>Translation process</h1>
+<ul class="incremental simple">
+<li>Strings to translate are extracted and appear on Transifex</li>
+<li>Language teams translate them</li>
+<li>&quot;String freeze&quot; when RC is released</li>
+<li>When the release is packaged, translated strings are pulled from Transifex and included in the final package.</li>
+</ul>
+</div>
+<div class="slide" id="how-to-contribute">
+<h1>3 - How to contribute?</h1>
+<div class="fullheight container">
+<img alt="pony_puzzle.png" class="center" src="pony_puzzle.png" />
+</div>
+</div>
+<div class="slide" id="help-others">
+<h1>Help others</h1>
+<ul class="incremental simple">
+<li>Great way to get a better understanding of Django's internals</li>
+<li>IRC: <tt class="docutils literal">#django</tt> on Freenode (<tt class="docutils literal"><span class="pre">#django-pl</span></tt>?)</li>
+<li><tt class="docutils literal"><span class="pre">django-users</span></tt> mailing list</li>
+</ul>
+</div>
+<div class="slide" id="try-early-versions">
+<h1>Try early versions</h1>
+<p>We release Alpha, Beta, and RC versions.</p>
+<p>Test them in your own projects before they're released.</p>
+</div>
+<div class="slide" id="how-to-install-a-pre-release">
+<h1>How to install a pre-release?</h1>
+<p>Use <strong>virtualenv</strong> and <strong>pip</strong>:</p>
+<pre class="literal-block">
+pip install \
+ https://www.djangoproject.com/\
+ download/1.7b1/tarball/
+</pre>
+</div>
+<div class="slide" id="id3">
+<h1>How to install a pre-release?</h1>
+<p>Use <strong>virtualenv</strong> and <strong>pip</strong>:</p>
+<pre class="literal-block">
+pip install -e \
+ git+https://github.com/\
+ django/django.git&#64;1.7b1
+</pre>
+</div>
+<div class="slide" id="id4">
+<h1>How to install a pre-release?</h1>
+<p>Use <strong>virtualenv</strong> and <strong>pip</strong>:</p>
+<pre class="literal-block">
+pip install --pre Django==1.7b1
+</pre>
+<p class="incremental">(soon)</p>
+</div>
+<div class="slide" id="report-bugs">
+<h1>Report bugs</h1>
+<p>Sooner or later, you'll find a bug:</p>
+<ul class="incremental simple">
+<li>Typo ⇒ pull request</li>
+<li>Anything more complex ⇒ new ticket on Trac</li>
+<li><strong>Don't report security issues on Trac!</strong></li>
+</ul>
+</div>
+<div class="slide" id="a-good-ticket">
+<h1>A good ticket</h1>
+<p>Reproducability is key:</p>
+<ul class="incremental simple">
+<li>Show us your code + steps</li>
+<li>Show tracebacks</li>
+<li>Give information about your platform (OS, libs, ...)</li>
+<li>Reduce the scope</li>
+</ul>
+</div>
+<div class="slide" id="triage">
+<h1>Triage</h1>
+<p>There's about 5-10 new tickets opened every day.</p>
+<p>Anybody can help out, not just core devs.</p>
+</div>
+<div class="slide" id="what-to-do-on-trac">
+<h1>What to do on Trac?</h1>
+<ul class="incremental simple">
+<li>Process unreviewed tickets (accept, reject)</li>
+<li>Make sure old bugs are still present</li>
+<li>Review patches/pull requests</li>
+</ul>
+</div>
+<div class="slide" id="contribute-code-and-docs">
+<h1>Contribute code and docs</h1>
+<ul class="incremental simple">
+<li>Write fixes for existing tickets</li>
+<li>Write documentation</li>
+<li>Improve existing patches (add missing tests, docs, ...)</li>
+</ul>
+</div>
+<div class="slide" id="write-libraries">
+<h1>Write libraries</h1>
+<p>Django's strength is also the huge amount of libraries written for it.</p>
+<p>Promote quality: tests, documentation, Python 3 support, ...</p>
+</div>
+<div class="slide" id="blog">
+<h1>Blog</h1>
+<p class="incremental">Not everything has its place in the documentation.</p>
+<p class="incremental">Some things are better left for the community to document.</p>
+<p class="incremental">Why not write your own blog engine with Django?</p>
+</div>
+<div class="slide" id="attend-events">
+<h1>Attend events</h1>
+<p class="incremental">Meet the community, become part of it.</p>
+<p class="incremental">Learn about cool new stuff.</p>
+<p class="incremental">Make friends!</p>
+</div>
+<div class="slide" id="level-up">
+<h1>Level up</h1>
+<p class="incremental">Can't find an event you'd like to attend?</p>
+<p class="incremental">Why not organize your own?</p>
+<p class="incremental">You won't get to sleep for days, but you'll learn a ton and it'll give you a new perspective.</p>
+</div>
+<div class="slide" id="something-for-everyone">
+<h1>Something for everyone</h1>
+<ul class="simple">
+<li>International conferences</li>
+<li>Meetup</li>
+<li>Sprints</li>
+</ul>
+</div>
+<div class="slide" id="conclusion">
+<h1>Conclusion</h1>
+<p class="incremental">Django is a <strong>community</strong> project.</p>
+<p class="incremental">We want <strong>openness</strong> and <strong>transparency</strong>.</p>
+<p class="incremental">Anything else is a <strong>bug</strong>.</p>
+<p class="center incremental"><strong>Help us fix it!</strong></p>
+</div>
+<div class="slide" id="dziekuje">
+<h1>Dziękuję!</h1>
+<div class="fullheight container">
+Pytania?</div>
+</div>
+<div class="slide" id="bonus-my-merge-workflow">
+<h1>Bonus: my merge workflow</h1>
+<pre class="code bash literal-block">
+wget https://github.com/<span class="se">\
+</span>    django/django/pull/XXXX.patch
+git apply XXXX.patch
+<span class="nv">PYTHONPATH</span><span class="o">=</span>. python tests/runtests.py
+git checkout -- django/
+<span class="nv">PYTHONPATH</span><span class="o">=</span>. python tests/runtests.py
+git checkout -- .
+git am XXXX.patch
+git push
+<span class="c"># Close PR.</span>
+</pre>
+</div>
+<div class="slide" id="links">
+<h1>Links</h1>
+<p>Django's site: '<a class="reference external" href="https://www.djangoproject.com">https://www.djangoproject.com</a>
+The code: <a class="reference external" href="https://github.com/django/django">https://github.com/django/django</a>
+DSF: <a class="reference external" href="https://www.djangoproject.com/foundation/">https://www.djangoproject.com/foundation/</a>
+Contributing: <a class="reference external" href="https://docs.djangoproject.com/en/dev/internals/contributing/">https://docs.djangoproject.com/en/dev/internals/contributing/</a>
+Contributing (not specific to Django): <a class="reference external" href="https://dont-be-afraid-to-commit.readthedocs.org/en/latest/contributing.html">https://dont-be-afraid-to-commit.readthedocs.org/en/latest/contributing.html</a>
+Django dashboard: <a class="reference external" href="https://dashboard.djangoproject.com">https://dashboard.djangoproject.com</a>
+Continuous integration (with coverage): <a class="reference external" href="https://ci.djangoproject.com">https://ci.djangoproject.com</a>
+Translation: <a class="reference external" href="https://www.transifex.com/projects/p/django-core/">https://www.transifex.com/projects/p/django-core/</a></p>
+</div>
+</div>
+</body>
+</html>
