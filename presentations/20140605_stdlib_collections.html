@@ -1,0 +1,1554 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>The collections module</title>
+<style type="text/css">
+
+.hll { background-color: #ffffcc }
+.c { color: #228B22 } /* Comment */
+.err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.k { color: #8B008B; font-weight: bold } /* Keyword */
+.cm { color: #228B22 } /* Comment.Multiline */
+.cp { color: #1e889b } /* Comment.Preproc */
+.c1 { color: #228B22 } /* Comment.Single */
+.cs { color: #8B008B; font-weight: bold } /* Comment.Special */
+.gd { color: #aa0000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #aa0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00aa00 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #555555 } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #aa0000 } /* Generic.Traceback */
+.kc { color: #8B008B; font-weight: bold } /* Keyword.Constant */
+.kd { color: #8B008B; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #8B008B; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #8B008B; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #8B008B; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #a7a7a7; font-weight: bold } /* Keyword.Type */
+.m { color: #B452CD } /* Literal.Number */
+.s { color: #CD5555 } /* Literal.String */
+.na { color: #658b00 } /* Name.Attribute */
+.nb { color: #658b00 } /* Name.Builtin */
+.nc { color: #008b45; font-weight: bold } /* Name.Class */
+.no { color: #00688B } /* Name.Constant */
+.nd { color: #707a7c } /* Name.Decorator */
+.ne { color: #008b45; font-weight: bold } /* Name.Exception */
+.nf { color: #008b45 } /* Name.Function */
+.nn { color: #008b45; text-decoration: underline } /* Name.Namespace */
+.nt { color: #8B008B; font-weight: bold } /* Name.Tag */
+.nv { color: #00688B } /* Name.Variable */
+.ow { color: #8B008B } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #B452CD } /* Literal.Number.Float */
+.mh { color: #B452CD } /* Literal.Number.Hex */
+.mi { color: #B452CD } /* Literal.Number.Integer */
+.mo { color: #B452CD } /* Literal.Number.Oct */
+.sb { color: #CD5555 } /* Literal.String.Backtick */
+.sc { color: #CD5555 } /* Literal.String.Char */
+.sd { color: #CD5555 } /* Literal.String.Doc */
+.s2 { color: #CD5555 } /* Literal.String.Double */
+.se { color: #CD5555 } /* Literal.String.Escape */
+.sh { color: #1c7e71; font-style: italic } /* Literal.String.Heredoc */
+.si { color: #CD5555 } /* Literal.String.Interpol */
+.sx { color: #cb6c20 } /* Literal.String.Other */
+.sr { color: #1c7e71 } /* Literal.String.Regex */
+.s1 { color: #CD5555 } /* Literal.String.Single */
+.ss { color: #CD5555 } /* Literal.String.Symbol */
+.bp { color: #658b00 } /* Name.Builtin.Pseudo */
+.vc { color: #00688B } /* Name.Variable.Class */
+.vg { color: #00688B } /* Name.Variable.Global */
+.vi { color: #00688B } /* Name.Variable.Instance */
+.il { color: #B452CD } /* Literal.Number.Integer.Long */
+
+</style>
+<style type="text/css">
+
+.floatleft {
+    float: left;
+    margin-right: 4%;
+}
+.fullheight {
+    /* For a page height of 768px */
+    /* height: 632px; */
+    height: 2000px;
+}
+.strike {
+    text-decoration: line-through;
+}
+.external:after {
+    content: "" !important; /* Remove stuff after <a> */
+}
+
+.current {
+    color: #000 !important;
+}
+
+strong {
+    color: #092E20;
+}
+
+#slide0 {
+    background: #092E20;
+    color: #fff;
+}
+
+#collections-deque,
+#collections-defaultdict,
+#collections-namedtuple,
+#collections-ordereddict,
+#collections-counter,
+#dziekuje,
+#bonus-recipes,
+#id95 {
+    background: #092E20;
+    color: #fff;
+    text-align: center;
+}
+
+#collections-deque h1,
+#collections-defaultdict h1,
+#collections-namedtuple h1,
+#collections-ordereddict h1,
+#collections-counter h1,
+#dziekuje h1,
+#bonus-recipes h1,
+#id95 h1 {
+    margin-bottom: 2em;
+}
+
+#slide0 pre,
+h1 tt,
+#collections-defaultdict .container tt,
+#collections-ordereddict .container tt {
+    background: inherit !important;
+}
+
+#collections-counter .pun {
+    font-size: 50%;
+}
+
+pre.smallcode {
+    font-size: 30% !important;
+}
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/medium-white/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/medium-white/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/medium-white/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/medium-white/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/medium-white/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>The <tt class="docutils literal">collections</tt> module</h1>
+
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">The <tt class="docutils literal">collections</tt> module</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<div class="fullheight container">
+<pre class="code text literal-block">
+from collections import (
+    deque, defaultdict, namedtuple,
+    OrderedDict, Counter
+)
+</pre>
+</div>
+
+</div>
+<div class="slide" id="about-me">
+<h1>About Me</h1>
+<img alt="baptiste.jpg" class="floatleft" src="baptiste.jpg" />
+<p><strong>Baptiste Mispelon</strong></p>
+<p>Online: <tt class="docutils literal">bmispelon</tt></p>
+<p>Web developer</p>
+<p>Django core dev since June 2013</p>
+</div>
+<div class="slide" id="what-is-this-talk-about">
+<h1>What Is This Talk About?</h1>
+<ul class="simple">
+<li><tt class="docutils literal">collections.deque</tt></li>
+<li><tt class="docutils literal">collections.defaultdict</tt></li>
+<li><tt class="docutils literal">collections.namedtuple</tt></li>
+<li><tt class="docutils literal">collections.OrderedDict</tt></li>
+<li><tt class="docutils literal">collections.Counter</tt></li>
+</ul>
+</div>
+<div class="slide" id="collections-deque">
+<h1><tt class="docutils literal">collections.deque</tt></h1>
+<div class="fullheight container">
+Pronounced like <em>deck</em></div>
+</div>
+<div class="slide" id="what-is-it">
+<h1>What Is It?</h1>
+<ul class="simple">
+<li><tt class="docutils literal">list</tt>-like container</li>
+<li>fast <tt class="docutils literal">apend</tt> and <tt class="docutils literal">prepend</tt></li>
+<li>(optional) limited length</li>
+</ul>
+</div>
+<div class="slide" id="quick-note-big-o">
+<h1>Quick Note: Big O</h1>
+<ul class="simple">
+<li><strong>O(1)</strong>: constant time (<em>immediate*</em>)</li>
+<li><strong>O(n)</strong>: linear (<em>twice the length, twice the time*</em>)</li>
+<li><strong>O(n²)</strong>: quadratic (<em>twice the length, 4 times the time*</em>)</li>
+</ul>
+<p>* <em>simplification</em></p>
+</div>
+<div class="slide" id="time-complexity">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>prepend</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="id1">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>prepend</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="id2">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>prepend</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="id3">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>prepend</td>
+<td>O(n)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="id4">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>O(1)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>prepend</td>
+<td>O(n)</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>O(n)</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="id5">
+<h1>Time Complexity</h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operation</th>
+<th class="head">list</th>
+<th class="head">deque</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>append</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr><td>pop (right)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr><td>prepend</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr><td>pop (left)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="initialization">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="n">deque</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre>
+<p>Both parameters are optional.</p>
+<p>Iterable: list, str, dict, generator, ...</p>
+</div>
+<div class="slide" id="id6">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">()</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id7">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">()</span> <span class="c"># ?</span>
+<span class="n">deque</span><span class="p">([])</span>
+</pre>
+</div>
+<div class="slide" id="id8">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id9">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="n">deque</span><span class="p">([</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">])</span>
+</pre>
+</div>
+<div class="slide" id="id10">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">(</span><span class="s">'abcdef'</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id11">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">(</span><span class="s">'abcdef'</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="n">deque</span><span class="p">([</span><span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">])</span>
+</pre>
+</div>
+<div class="slide" id="id12">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deque</span><span class="p">(</span><span class="s">'abcdef'</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="n">deque</span><span class="p">([</span><span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">])</span>
+</pre>
+</div>
+<div class="slide" id="practical-example">
+<h1>Practical Example</h1>
+<p>Print the last 20 lines of a file.</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>tail -n 20 some_file.txt
+</pre>
+</div>
+<div class="slide" id="approach-1-naive">
+<h1>Approach 1: Naive</h1>
+<pre class="code python literal-block">
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'some_file.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span> <span class="c">###</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="approach-2-more-robust">
+<h1>Approach 2: More Robust</h1>
+<pre class="code python literal-block">
+<span class="n">last</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'some_file.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">last</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">last</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">###</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="approach-3-deque">
+<h1>Approach 3: <tt class="docutils literal">deque</tt></h1>
+<pre class="code python literal-block">
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'some_file.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c">###</span>
+<span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="collections-defaultdict">
+<h1><tt class="docutils literal">collections.defaultdict</tt></h1>
+<div class="fullheight container">
+No more <tt class="docutils literal">KeyError</tt></div>
+</div>
+<div class="slide" id="id13">
+<h1>What Is It?</h1>
+<ul class="simple">
+<li><tt class="docutils literal">dict</tt> subclass</li>
+<li>provides default value for missing keys</li>
+</ul>
+</div>
+<div class="slide" id="id14">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># defaultdict(factory, *a, **kw)</span>
+<span class="n">defaultdict</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">defaultdict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+<span class="n">defaultdict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[(</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">)])</span>
+<span class="n">defaultdict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="what-s-a-factory">
+<h1>What's a Factory?</h1>
+<p>Any callable without required arguments:</p>
+<ul class="simple">
+<li>functions (named or anonymous)</li>
+<li>classes</li>
+<li>instance methods</li>
+</ul>
+</div>
+<div class="slide" id="factory-examples">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># ?</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># ?</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id15">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># ?</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># ?</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id16">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># ?</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># ?</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id17">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># 0.0</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># ?</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id18">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># 0.0</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># 0j</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ?</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id19">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># 0.0</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># 0j</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ''</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># ?</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id20">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># 0.0</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># 0j</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ''</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># []</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id21">
+<h1>Factory Examples:</h1>
+<pre class="code python literal-block">
+<span class="nb">bool</span><span class="p">()</span>    <span class="c"># False</span>
+<span class="nb">int</span><span class="p">()</span>     <span class="c"># 0</span>
+<span class="nb">float</span><span class="p">()</span>   <span class="c"># 0.0</span>
+<span class="nb">complex</span><span class="p">()</span> <span class="c"># 0j</span>
+<span class="nb">str</span><span class="p">()</span>     <span class="c"># ''</span>
+<span class="nb">list</span><span class="p">()</span>    <span class="c"># []</span>
+<span class="nb">dict</span><span class="p">()</span>    <span class="c"># {}</span>
+</pre>
+</div>
+<div class="slide" id="missing-keys">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="c"># Regular dict:</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id22">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="c"># Regular dict:</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+</pre>
+</div>
+<div class="slide" id="id23">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="c"># Regular dict:</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'missing'</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id24">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="c"># Regular dict:</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+<span class="n">rd</span><span class="p">[</span><span class="s">'missing'</span><span class="p">]</span> <span class="c"># KeyError</span>
+</pre>
+</div>
+<div class="slide" id="id25">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'X'</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id26">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'X'</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+</pre>
+</div>
+<div class="slide" id="id27">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'X'</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'missing'</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id28">
+<h1>Missing Keys</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'X'</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'foo'</span><span class="p">]</span>     <span class="c"># 'bar'</span>
+<span class="n">dd</span><span class="p">[</span><span class="s">'missing'</span><span class="p">]</span> <span class="c"># 'X'</span>
+</pre>
+</div>
+<div class="slide" id="id29">
+<h1>Practical Example</h1>
+<p>Given a list of payments (date, amount),</p>
+<p>we want to get a mapping of {date: [amounts]}</p>
+</div>
+<div class="slide" id="id30">
+<h1>Approach 1: Naive</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">date</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="approach-2-improved">
+<h1>Approach 2: Improved</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="approach-3-defaultdict">
+<h1>Approach 3: <tt class="docutils literal">defaultdict</tt></h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">date</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="collections-namedtuple">
+<h1><tt class="docutils literal">collections.namedtuple</tt></h1>
+<div class="fullheight container">
+Make your code more readable</div>
+</div>
+<div class="slide" id="what-is-a-named-tuple">
+<h1>What Is a Named Tuple?</h1>
+<p>It's a subclass of tuple whose attributes can also be accessed by name
+(not just by position).</p>
+<p>It uses as much memory as a regular tuple.</p>
+<p>Like a tuple, it's immutable.</p>
+</div>
+<div class="slide" id="id31">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># cls = namedtuple(name, fields)</span>
+</pre>
+</div>
+<div class="slide" id="id32">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># cls = namedtuple(name, fields)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">])</span>
+</pre>
+</div>
+<div class="slide" id="id33">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># cls = namedtuple(name, fields)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">])</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id34">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># cls = namedtuple(name, fields)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">])</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x,y,z'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id35">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="c"># cls = namedtuple(name, fields)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">])</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+<span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x,y,z'</span><span class="p">)</span>
+<span class="c"># Creates **classes**,</span>
+<span class="c">#     not **instances**.</span>
+</pre>
+</div>
+<div class="slide" id="creation">
+<h1>Creation</h1>
+<pre class="code python literal-block">
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id36">
+<h1>Creation</h1>
+<pre class="code python literal-block">
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id37">
+<h1>Creation</h1>
+<pre class="code python literal-block">
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id38">
+<h1>Creation</h1>
+<pre class="code python literal-block">
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Point'</span><span class="p">,</span> <span class="s">'x y z'</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="accessing-fields">
+<h1>Accessing Fields</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id39">
+<h1>Accessing Fields</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id40">
+<h1>Accessing Fields</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># 23</span>
+</pre>
+</div>
+<div class="slide" id="id41">
+<h1>Accessing Fields</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># 23</span>
+<span class="n">p</span><span class="o">.</span><span class="n">z</span>  <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id42">
+<h1>Accessing Fields</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># 23</span>
+<span class="n">p</span><span class="o">.</span><span class="n">z</span>  <span class="c"># 85</span>
+</pre>
+</div>
+<div class="slide" id="attributes-and-methods">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">_fields</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id43">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">_fields</span> <span class="c"># ['x', 'y', 'z']</span>
+</pre>
+</div>
+<div class="slide" id="id44">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id45">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">56</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id46">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">56</span><span class="p">)</span>
+<span class="nb">tuple</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id47">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">56</span><span class="p">)</span>
+<span class="nb">tuple</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="c"># (23, 10, 56)</span>
+</pre>
+</div>
+<div class="slide" id="id48">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id49">
+<h1>Attributes And Methods</h1>
+<pre class="code python literal-block">
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="c"># {'x': 23, 'y': 10, 'z': 85}</span>
+</pre>
+</div>
+<div class="slide" id="collections-ordereddict">
+<h1><tt class="docutils literal">collections.OrderedDict</tt></h1>
+<div class="fullheight container">
+A <tt class="docutils literal">dict</tt> with superpowers</div>
+</div>
+<div class="slide" id="id50">
+<h1>What Is It?</h1>
+<ul class="simple">
+<li><tt class="docutils literal">dict</tt> subclass</li>
+<li>keep order of keys</li>
+</ul>
+</div>
+<div class="slide" id="id51">
+<h1>Initialization</h1>
+<p>Identical to dict.</p>
+<pre class="code python literal-block">
+<span class="n">OrderedDict</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+<span class="n">OrderedDict</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+<span class="n">OrderedDict</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="dict-has-no-order">
+<h1><tt class="docutils literal">dict</tt> Has No Order</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id52">
+<h1><tt class="docutils literal">dict</tt> Has No Order</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># 'acb'</span>
+</pre>
+</div>
+<div class="slide" id="id53">
+<h1><tt class="docutils literal">dict</tt> Has No Order</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># 'acb'</span>
+<span class="c"># Actually,</span>
+<span class="c"># it depends on python's version.</span>
+</pre>
+</div>
+<div class="slide" id="id54">
+<h1><tt class="docutils literal">dict</tt> Has No Order</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># 'acb'</span>
+<span class="c"># Actually,</span>
+<span class="c"># it depends on python's version.</span>
+<span class="c"># And it's also affected by -R flag.</span>
+</pre>
+</div>
+<div class="slide" id="but">
+<h1>But ...</h1>
+<p>Order is consistent between two iterations
+if no items have been added or deleted.</p>
+<pre class="code python literal-block">
+<span class="nb">zip</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="c"># Same as d.items()</span>
+</pre>
+</div>
+<div class="slide" id="shortcut-fromkeys">
+<h1>Shortcut (fromkeys)</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+</pre>
+</div>
+<div class="slide" id="id55">
+<h1>Shortcut (fromkeys)</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s">'abc'</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="c"># Can be written as:</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="bringing-back-order">
+<h1>Bringing Back Order</h1>
+<p><tt class="docutils literal">OrderedDict</tt> are ordered by insertion order:</p>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id56">
+<h1>Bringing Back Order</h1>
+<p><tt class="docutils literal">OrderedDict</tt> are ordered by insertion order:</p>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># 'abc'</span>
+</pre>
+</div>
+<div class="slide" id="keys-are-still-unique">
+<h1>Keys Are Still Unique!</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abcda'</span><span class="p">)</span>
+<span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id57">
+<h1>Keys Are Still Unique!</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abcda'</span><span class="p">)</span>
+<span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c"># 'bcda'</span>
+</pre>
+</div>
+<div class="slide" id="comparisons">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id58">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+</pre>
+</div>
+<div class="slide" id="id59">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">od2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id60">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">od2</span> <span class="c"># False</span>
+</pre>
+</div>
+<div class="slide" id="id61">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">od2</span> <span class="c"># False</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id62">
+<h1>Comparisons</h1>
+<pre class="code python literal-block">
+<span class="n">od1</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">od2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+<span class="n">rd1</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="n">rd2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="s">'cba'</span><span class="p">)</span>
+
+<span class="n">rd1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">od2</span> <span class="c"># False</span>
+<span class="n">od1</span> <span class="o">==</span> <span class="n">rd2</span> <span class="c"># True</span>
+</pre>
+</div>
+<div class="slide" id="collections-counter">
+<h1><tt class="docutils literal">collections.Counter</tt></h1>
+<div class="fullheight container">
+<p>You can count on it*</p>
+<p class="pun">* <em>sorry for the bad pun</em></p>
+</div>
+</div>
+<div class="slide" id="id63">
+<h1>What Is It?</h1>
+<ul class="simple">
+<li><tt class="docutils literal">dict</tt> subclass</li>
+<li>counts stuff</li>
+</ul>
+</div>
+<div class="slide" id="id64">
+<h1>Initialization</h1>
+<pre class="code python literal-block">
+<span class="n">Counter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</pre>
+<p>Iterable: list, str, dict, generator, ...</p>
+</div>
+<div class="slide" id="counting-characters">
+<h1>Counting Characters</h1>
+<pre class="code python literal-block">
+<span class="c"># First approach, with a plain dict:</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">'ababac'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+        <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+</pre>
+</div>
+<div class="slide" id="id65">
+<h1>Counting Characters</h1>
+<pre class="code python literal-block">
+<span class="c"># second approach, with a defaultdict</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">'ababac'</span><span class="p">:</span>
+    <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+</pre>
+</div>
+<div class="slide" id="id66">
+<h1>Counting Characters</h1>
+<pre class="code python literal-block">
+<span class="c"># Finally, with a Counter</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'ababac'</span><span class="p">)</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+</pre>
+</div>
+<div class="slide" id="counter-is-a-dict">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id67">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+</pre>
+</div>
+<div class="slide" id="id68">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'d'</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id69">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="c"># 3</span>
+<span class="n">counter</span><span class="p">[</span><span class="s">'d'</span><span class="p">]</span> <span class="c"># 0</span>
+</pre>
+</div>
+<div class="slide" id="id70">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id71">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="c"># 6</span>
+<span class="c"># Total number of elements</span>
+</pre>
+</div>
+<div class="slide" id="id72">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id73">
+<h1>Counter Is A dict!</h1>
+<pre class="code python literal-block">
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="c"># ['a', 'b', 'c']</span>
+<span class="c"># List of unique elements</span>
+</pre>
+</div>
+<div class="slide" id="counter-elements">
+<h1><tt class="docutils literal">Counter.elements()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># List elements, with repetition</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'ababac'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">()</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id74">
+<h1><tt class="docutils literal">Counter.elements()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># List elements, with repetition</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'ababac'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">()</span>
+<span class="c"># ['a', 'a', 'a', 'b', 'b', 'c']</span>
+</pre>
+</div>
+<div class="slide" id="id75">
+<h1><tt class="docutils literal">Counter.elements()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># List elements, with repetition</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'ababac'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">()</span>
+<span class="c"># ['a', 'a', 'a', 'b', 'b', 'c']</span>
+<span class="c"># The order is arbitrary!</span>
+</pre>
+</div>
+<div class="slide" id="counter-most-common">
+<h1><tt class="docutils literal">Counter.most_common()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># List (element, count)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id76">
+<h1><tt class="docutils literal">Counter.most_common()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># List (element, count)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+<span class="c"># [('a', 3), ('b', 2), ('c', 1)]</span>
+</pre>
+</div>
+<div class="slide" id="counter-most-common-n">
+<h1><tt class="docutils literal">Counter.most_common(N)</tt></h1>
+<pre class="code python literal-block">
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id77">
+<h1><tt class="docutils literal">Counter.most_common(N)</tt></h1>
+<pre class="code python literal-block">
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabbc'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c"># [('a', 3), ('b', 2)]</span>
+</pre>
+</div>
+<div class="slide" id="counter-update">
+<h1><tt class="docutils literal">Counter.update()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># Add elements</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabb'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id78">
+<h1><tt class="docutils literal">Counter.update()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># Add elements</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabb'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="c"># Counter({'a': 5, 'b': 3})</span>
+</pre>
+</div>
+<div class="slide" id="counter-subtract">
+<h1><tt class="docutils literal">Counter.subtract()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># subtract elements</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabb'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id79">
+<h1><tt class="docutils literal">Counter.subtract()</tt></h1>
+<pre class="code python literal-block">
+<span class="c"># subtract elements</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaabb'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="c"># Counter({'a': 1, 'b': 1})</span>
+</pre>
+</div>
+<div class="slide" id="arithmetic-operations">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id80">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+</pre>
+</div>
+<div class="slide" id="id81">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id82">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2})</span>
+</pre>
+</div>
+<div class="slide" id="id83">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2})</span>
+<span class="n">c1</span> <span class="o">&amp;</span> <span class="n">c2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id84">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2})</span>
+<span class="n">c1</span> <span class="o">&amp;</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2, 'b': 2})</span>
+</pre>
+</div>
+<div class="slide" id="id85">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2})</span>
+<span class="n">c1</span> <span class="o">&amp;</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2, 'b': 2})</span>
+<span class="n">c1</span> <span class="o">|</span> <span class="n">c2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id86">
+<h1>Arithmetic Operations</h1>
+<pre class="code python literal-block">
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aaaabb'</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'aabbb'</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="c"># Counter({'a': 6, 'b': 5})</span>
+<span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2})</span>
+<span class="n">c1</span> <span class="o">&amp;</span> <span class="n">c2</span> <span class="c"># Counter({'a': 2, 'b': 2})</span>
+<span class="n">c1</span> <span class="o">|</span> <span class="n">c2</span> <span class="c"># Counter({'a': 4, 'b': 3})</span>
+</pre>
+</div>
+<div class="slide" id="conclusion-tl-dl">
+<h1>Conclusion (TL;DL)</h1>
+<ul class="simple">
+<li><strong>deque</strong>: list with fast operations on both sides;</li>
+<li><strong>defaultdict</strong>: dict with default values;</li>
+<li><strong>namedtuple</strong>: tuple with named attributes;</li>
+<li><strong>OrderedDict</strong>: ordered dict;</li>
+<li><strong>Counter</strong>: counts things.</li>
+</ul>
+</div>
+<div class="slide" id="dziekuje">
+<h1>Dziękuję!</h1>
+<div class="fullheight container">
+Pytania?</div>
+</div>
+<div class="slide" id="bonus-recipes">
+<h1>Bonus: Recipes</h1>
+<div class="fullheight container">
+...</div>
+</div>
+<div class="slide" id="formatting-with-defaults">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id87">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="s">'no'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># 'yes no'</span>
+</pre>
+</div>
+<div class="slide" id="id88">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id89">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># KeyError: 'n'</span>
+</pre>
+</div>
+<div class="slide" id="id90">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'no'</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id91">
+<h1>Formatting With Defaults</h1>
+<pre class="code python literal-block">
+<span class="n">factory</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">'no'</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'yes'</span><span class="p">)</span>
+<span class="s">'</span><span class="si">%(y)s</span><span class="s"> </span><span class="si">%(n)s</span><span class="s">'</span> <span class="o">%</span> <span class="n">d</span>
+<span class="c"># 'yes no'</span>
+</pre>
+</div>
+<div class="slide" id="auto-vivifying-tree">
+<h1>Auto-vivifying Tree</h1>
+<pre class="code python literal-block">
+<span class="c"># don't try this at home!</span>
+<span class="k">def</span> <span class="nf">factory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">factory</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s">'a'</span><span class="p">][</span><span class="s">'b'</span><span class="p">][</span><span class="s">'c'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</pre>
+</div>
+<div class="slide" id="counting-letters">
+<h1>Counting Letters</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'a,b.a8a?b'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id92">
+<h1>Counting Letters</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'a,b.a8a?b'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="c"># Counter({'a': 3, 'b': 2})</span>
+</pre>
+</div>
+<div class="slide" id="counting-letters-ci">
+<h1>Counting Letters (CI)</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'a,b.A8A?B'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id93">
+<h1>Counting Letters (CI)</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'a,b.A8A?B'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="c"># Counter({'a': 3, 'b': 2})</span>
+</pre>
+</div>
+<div class="slide" id="couting-words">
+<h1>Couting words</h1>
+<pre class="code python literal-block">
+<span class="n">text</span> <span class="o">=</span> <span class="s">'foo bar foo'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id94">
+<h1>Couting words</h1>
+<pre class="code python literal-block">
+<span class="n">text</span> <span class="o">=</span> <span class="s">'foo bar foo'</span>
+<span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="c"># Counter({'foo': 2, 'bar': 1})</span>
+</pre>
+</div>
+<div class="slide" id="id95">
+<h1>Dziękuję!</h1>
+<div class="fullheight container">
+Pytania?</div>
+</div>
+</div>
+</body>
+</html>
