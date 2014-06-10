@@ -1,0 +1,1625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>Exploring Python's stdlib</title>
+<style type="text/css">
+
+.hll { background-color: #ffffcc }
+.c { color: #228B22 } /* Comment */
+.err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.k { color: #8B008B; font-weight: bold } /* Keyword */
+.cm { color: #228B22 } /* Comment.Multiline */
+.cp { color: #1e889b } /* Comment.Preproc */
+.c1 { color: #228B22 } /* Comment.Single */
+.cs { color: #8B008B; font-weight: bold } /* Comment.Special */
+.gd { color: #aa0000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #aa0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00aa00 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #555555 } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #aa0000 } /* Generic.Traceback */
+.kc { color: #8B008B; font-weight: bold } /* Keyword.Constant */
+.kd { color: #8B008B; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #8B008B; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #8B008B; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #8B008B; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #a7a7a7; font-weight: bold } /* Keyword.Type */
+.m { color: #B452CD } /* Literal.Number */
+.s { color: #CD5555 } /* Literal.String */
+.na { color: #658b00 } /* Name.Attribute */
+.nb { color: #658b00 } /* Name.Builtin */
+.nc { color: #008b45; font-weight: bold } /* Name.Class */
+.no { color: #00688B } /* Name.Constant */
+.nd { color: #707a7c } /* Name.Decorator */
+.ne { color: #008b45; font-weight: bold } /* Name.Exception */
+.nf { color: #008b45 } /* Name.Function */
+.nn { color: #008b45; text-decoration: underline } /* Name.Namespace */
+.nt { color: #8B008B; font-weight: bold } /* Name.Tag */
+.nv { color: #00688B } /* Name.Variable */
+.ow { color: #8B008B } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #B452CD } /* Literal.Number.Float */
+.mh { color: #B452CD } /* Literal.Number.Hex */
+.mi { color: #B452CD } /* Literal.Number.Integer */
+.mo { color: #B452CD } /* Literal.Number.Oct */
+.sb { color: #CD5555 } /* Literal.String.Backtick */
+.sc { color: #CD5555 } /* Literal.String.Char */
+.sd { color: #CD5555 } /* Literal.String.Doc */
+.s2 { color: #CD5555 } /* Literal.String.Double */
+.se { color: #CD5555 } /* Literal.String.Escape */
+.sh { color: #1c7e71; font-style: italic } /* Literal.String.Heredoc */
+.si { color: #CD5555 } /* Literal.String.Interpol */
+.sx { color: #cb6c20 } /* Literal.String.Other */
+.sr { color: #1c7e71 } /* Literal.String.Regex */
+.s1 { color: #CD5555 } /* Literal.String.Single */
+.ss { color: #CD5555 } /* Literal.String.Symbol */
+.bp { color: #658b00 } /* Name.Builtin.Pseudo */
+.vc { color: #00688B } /* Name.Variable.Class */
+.vg { color: #00688B } /* Name.Variable.Global */
+.vi { color: #00688B } /* Name.Variable.Instance */
+.il { color: #B452CD } /* Literal.Number.Integer.Long */
+
+</style>
+<style type="text/css">
+
+.floatleft {
+    float: left;
+    margin-right: 4%;
+}
+.fullheight {
+    /* For a page height of 768px */
+    /* height: 632px; */
+    height: 2000px;
+}
+.strike {
+    text-decoration: line-through;
+}
+.external:after {
+    content: "" !important; /* Remove stuff after <a> */
+}
+
+.current {
+    color: #000 !important;
+}
+
+strong {
+    color: #092E20;
+}
+
+#slide0 {
+    background: #092E20;
+    color: #fff;
+}
+#slide0 .container {
+    /* For a page height of 768px */
+    /* height: 412px; */
+}
+
+table.builtins {
+    font-size: 60%;
+}
+table.builtins .hl {
+    color: red;
+    font-family: monospace;
+    font-size: 90%;
+}
+.code.bad {
+    background: #fbb;
+}
+.code.good {
+    background: #bfb;
+}
+
+#import-unicodedata .code {
+    font-size: 80%;
+}
+
+#part-1-builtins,
+#part-2-builtins-with-a-twist,
+#part-3-exotic-stdlib-modules,
+#tldl,
+#dziekuje {
+    background: #092E20;
+    color: #fff;
+    text-align: center;
+}
+
+#part-1-builtins h1,
+#part-2-builtins-with-a-twist h1,
+#part-3-exotic-stdlib-modules h1,
+#tldl h1,
+#dziekuje h1 {
+    margin-bottom: 156px;
+}
+
+#part-2-builtins-with-a-twist tt,
+#tldl tt {
+    background: inherit !important;
+}
+
+
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/medium-white/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/medium-white/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/medium-white/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/medium-white/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/medium-white/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>Exploring Python's stdlib</h1>
+
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">Exploring Python's stdlib</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<div class="fullheight container">
+What can you do with a plain install of Python?</div>
+
+</div>
+<div class="slide" id="about-me">
+<h1>About me</h1>
+<img alt="baptiste.jpg" class="floatleft" src="baptiste.jpg" />
+<p><strong>Baptiste Mispelon</strong></p>
+<p>Online: <tt class="docutils literal">bmispelon</tt></p>
+<p>Web developer</p>
+<p>Django core dev since June 2013</p>
+</div>
+<div class="slide" id="content-of-the-talk">
+<h1>Content of the talk</h1>
+<ul class="simple">
+<li>Builtin functions</li>
+<li>Little-known usage of common builtins</li>
+<li>Little-known modules</li>
+</ul>
+</div>
+<div class="slide" id="notes">
+<h1>Notes</h1>
+<ul class="simple">
+<li>Nothing too advanced</li>
+<li>Lots of bite-sized examples</li>
+<li>Python 3</li>
+</ul>
+</div>
+<div class="slide" id="table-of-content">
+<h1>Table of content</h1>
+<ul class="simple">
+<li><strong>Builtin functions</strong></li>
+<li>Little-known usage of common builtins</li>
+<li>Little-known modules</li>
+</ul>
+</div>
+<div class="slide" id="part-1-builtins">
+<h1>Part 1: Builtins</h1>
+<div class="fullheight container">
+<p>Python has <em>69</em> builtin functions.</p>
+<p><em>(80 in Python 2)</em></p>
+</div>
+</div>
+<div class="slide" id="python-s-builtins">
+<h1>Python's builtins</h1>
+<table border="1" class="builtins docutils">
+<colgroup>
+<col width="21%" />
+<col width="19%" />
+<col width="20%" />
+<col width="17%" />
+<col width="23%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">abs</tt></td>
+<td><tt class="docutils literal">dict</tt></td>
+<td><tt class="docutils literal">help</tt></td>
+<td><tt class="docutils literal">min</tt></td>
+<td><tt class="docutils literal">setattr</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">all</tt></td>
+<td><tt class="docutils literal">dir</tt></td>
+<td><tt class="docutils literal">hex</tt></td>
+<td><tt class="docutils literal">next</tt></td>
+<td><tt class="docutils literal">slice</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">any</tt></td>
+<td><tt class="docutils literal">divmod</tt></td>
+<td><tt class="docutils literal">id</tt></td>
+<td><tt class="docutils literal">object</tt></td>
+<td><tt class="docutils literal">sorted</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">ascii</tt></td>
+<td><tt class="docutils literal">enumerate</tt></td>
+<td><tt class="docutils literal">input</tt></td>
+<td><tt class="docutils literal">oct</tt></td>
+<td><tt class="docutils literal">staticmethod</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bin</tt></td>
+<td><tt class="docutils literal">eval</tt></td>
+<td><tt class="docutils literal">int</tt></td>
+<td><tt class="docutils literal">open</tt></td>
+<td><tt class="docutils literal">str</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bool</tt></td>
+<td><tt class="docutils literal">exec</tt></td>
+<td><tt class="docutils literal">isinstance</tt></td>
+<td><tt class="docutils literal">ord</tt></td>
+<td><tt class="docutils literal">sum</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bytearray</tt></td>
+<td><tt class="docutils literal">filter</tt></td>
+<td><tt class="docutils literal">issubclass</tt></td>
+<td><tt class="docutils literal">pow</tt></td>
+<td><tt class="docutils literal">super</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bytes</tt></td>
+<td><tt class="docutils literal">float</tt></td>
+<td><tt class="docutils literal">iter</tt></td>
+<td><tt class="docutils literal">print</tt></td>
+<td><tt class="docutils literal">tuple</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">callable</tt></td>
+<td><tt class="docutils literal">format</tt></td>
+<td><tt class="docutils literal">len</tt></td>
+<td><tt class="docutils literal">property</tt></td>
+<td><tt class="docutils literal">type</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">chr</tt></td>
+<td><tt class="docutils literal">frozenset</tt></td>
+<td><tt class="docutils literal">list</tt></td>
+<td><tt class="docutils literal">range</tt></td>
+<td><tt class="docutils literal">unichr</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">classmethod</tt></td>
+<td><tt class="docutils literal">getattr</tt></td>
+<td><tt class="docutils literal">locals</tt></td>
+<td><tt class="docutils literal">repr</tt></td>
+<td><tt class="docutils literal">vars</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">compile</tt></td>
+<td><tt class="docutils literal">globals</tt></td>
+<td><tt class="docutils literal">map</tt></td>
+<td><tt class="docutils literal">reversed</tt></td>
+<td><tt class="docutils literal">zip</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">complex</tt></td>
+<td><tt class="docutils literal">hasattr</tt></td>
+<td><tt class="docutils literal">max</tt></td>
+<td><tt class="docutils literal">round</tt></td>
+<td><tt class="docutils literal">__import__</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">delattr</tt></td>
+<td><tt class="docutils literal">hash</tt></td>
+<td><tt class="docutils literal">memoryview</tt></td>
+<td><tt class="docutils literal">set</tt></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="short-selection">
+<h1>Short Selection</h1>
+<table border="1" class="builtins docutils">
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="19%" />
+<col width="17%" />
+<col width="22%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">abs</tt></td>
+<td><tt class="docutils literal">dict</tt></td>
+<td><tt class="docutils literal">help</tt></td>
+<td><tt class="docutils literal">min</tt></td>
+<td><tt class="docutils literal">setattr</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">all</tt></td>
+<td><span class="hl">dir</span></td>
+<td><tt class="docutils literal">hex</tt></td>
+<td><tt class="docutils literal">next</tt></td>
+<td><span class="hl">slice</span></td>
+</tr>
+<tr><td><tt class="docutils literal">any</tt></td>
+<td><span class="hl">divmod</span></td>
+<td><tt class="docutils literal">id</tt></td>
+<td><tt class="docutils literal">object</tt></td>
+<td><tt class="docutils literal">sorted</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">ascii</tt></td>
+<td><tt class="docutils literal">enumerate</tt></td>
+<td><tt class="docutils literal">input</tt></td>
+<td><tt class="docutils literal">oct</tt></td>
+<td><tt class="docutils literal">staticmethod</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bin</tt></td>
+<td><tt class="docutils literal">eval</tt></td>
+<td><tt class="docutils literal">int</tt></td>
+<td><tt class="docutils literal">open</tt></td>
+<td><tt class="docutils literal">str</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bool</tt></td>
+<td><tt class="docutils literal">exec</tt></td>
+<td><tt class="docutils literal">isinstance</tt></td>
+<td><tt class="docutils literal">ord</tt></td>
+<td><tt class="docutils literal">sum</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bytearray</tt></td>
+<td><tt class="docutils literal">filter</tt></td>
+<td><tt class="docutils literal">issubclass</tt></td>
+<td><tt class="docutils literal">pow</tt></td>
+<td><tt class="docutils literal">super</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">bytes</tt></td>
+<td><tt class="docutils literal">float</tt></td>
+<td><tt class="docutils literal">iter</tt></td>
+<td><tt class="docutils literal">print</tt></td>
+<td><tt class="docutils literal">tuple</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">callable</tt></td>
+<td><tt class="docutils literal">format</tt></td>
+<td><tt class="docutils literal">len</tt></td>
+<td><tt class="docutils literal">property</tt></td>
+<td><tt class="docutils literal">type</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">chr</tt></td>
+<td><span class="hl">frozenset</span></td>
+<td><tt class="docutils literal">list</tt></td>
+<td><tt class="docutils literal">range</tt></td>
+<td><tt class="docutils literal">unichr</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">classmethod</tt></td>
+<td><tt class="docutils literal">getattr</tt></td>
+<td><tt class="docutils literal">locals</tt></td>
+<td><tt class="docutils literal">repr</tt></td>
+<td><tt class="docutils literal">vars</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">compile</tt></td>
+<td><tt class="docutils literal">globals</tt></td>
+<td><tt class="docutils literal">map</tt></td>
+<td><tt class="docutils literal">reversed</tt></td>
+<td><tt class="docutils literal">zip</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">complex</tt></td>
+<td><tt class="docutils literal">hasattr</tt></td>
+<td><tt class="docutils literal">max</tt></td>
+<td><tt class="docutils literal">round</tt></td>
+<td><tt class="docutils literal">__import__</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">delattr</tt></td>
+<td><tt class="docutils literal">hash</tt></td>
+<td><tt class="docutils literal">memoryview</tt></td>
+<td><span class="hl">set</span></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="dir">
+<h1><tt class="docutils literal">dir</tt></h1>
+<p>Quick and dirty introspection.</p>
+<p>List of all the attributes/methods of an object (as strings).</p>
+</div>
+<div class="slide" id="example">
+<h1>Example</h1>
+<p>What are all the public attributes of this object?</p>
+<pre class="code python literal-block">
+<span class="n">obj</span> <span class="o">=</span> <span class="s">'hello world'</span>
+<span class="p">[</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)]</span>
+</pre>
+</div>
+<div class="slide" id="id1">
+<h1>Example</h1>
+<p>What are all the public attributes of this object?</p>
+<pre class="code python literal-block">
+<span class="n">obj</span> <span class="o">=</span> <span class="s">'hello world'</span>
+<span class="p">[</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'_'</span><span class="p">)]</span>
+<span class="c"># ['capitalize', 'casefold',</span>
+<span class="c">#  'center', 'count', ...]</span>
+</pre>
+</div>
+<div class="slide" id="divmod">
+<h1><tt class="docutils literal">divmod</tt></h1>
+<p>Given two numbers, return a pair of quotient, remainder.</p>
+</div>
+<div class="slide" id="id2">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id3">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="c"># 8, 2</span>
+</pre>
+</div>
+<div class="slide" id="id4">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="c"># 8, 2</span>
+</pre>
+</div>
+<div class="slide" id="slice">
+<h1><tt class="docutils literal">slice</tt></h1>
+<p>Create slice objects.</p>
+</div>
+<div class="slide" id="id5">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghi'</span>
+<span class="n">s</span><span class="p">[</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># ?</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># ?</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id6">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghi'</span>
+<span class="n">s</span><span class="p">[</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># 'abcdefgh'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># ?</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id7">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghi'</span>
+<span class="n">s</span><span class="p">[</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># 'abcdefgh'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># 'bcdefgh'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id8">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghi'</span>
+<span class="n">s</span><span class="p">[</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># 'abcdefgh'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># 'bcdefgh'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># 'bdfh'</span>
+</pre>
+</div>
+<div class="slide" id="with-slice">
+<h1>With <tt class="docutils literal">slice</tt></h1>
+<pre class="code python literal-block">
+<span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghi'</span>
+<span class="n">s</span><span class="p">[</span> <span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>   <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+</pre>
+</div>
+<div class="slide" id="set">
+<h1><tt class="docutils literal">set</tt></h1>
+<p>Unordered collection of distinct objects.</p>
+</div>
+<div class="slide" id="advantages">
+<h1>Advantages</h1>
+<ul class="simple">
+<li>Behave like lists: <tt class="docutils literal">iter(set)</tt>, <tt class="docutils literal">len(set)</tt>, <tt class="docutils literal">x in set</tt></li>
+<li>Elements are unique</li>
+<li><tt class="docutils literal">x in set</tt> is O(1)</li>
+</ul>
+</div>
+<div class="slide" id="usage">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id9">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id10">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+</pre>
+</div>
+<div class="slide" id="id11">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">3</span>
+</pre>
+</div>
+<div class="slide" id="id12">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+</pre>
+</div>
+<div class="slide" id="id13">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">6</span>
+</pre>
+</div>
+<div class="slide" id="id14">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id15">
+<h1>Usage</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="s">'abcabcabc'</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="bp">True</span>
+</pre>
+</div>
+<div class="slide" id="restrictions">
+<h1>Restrictions</h1>
+<ul class="simple">
+<li>Elements must be hashable (like keys of a dict)</li>
+<li>Not indexable: <tt class="docutils literal">some_set[0]</tt> does not work.</li>
+<li>No order (like a dict)</li>
+</ul>
+</div>
+<div class="slide" id="set-literals">
+<h1>Set literals</h1>
+<p>Since python 2.7:</p>
+<pre class="code python literal-block">
+<span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c"># Is the same as doing</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="set-comprehensions">
+<h1>Set comprehensions</h1>
+<p>Since python 2.7 (too):</p>
+<pre class="code python literal-block">
+<span class="nb">set</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wordlist</span><span class="p">)</span>
+<span class="c"># Is the same as doing</span>
+<span class="p">{</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wordlist</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="operators">
+<h1>Operators</h1>
+<ul class="simple">
+<li>intersection: <tt class="docutils literal">s1 &amp; s2</tt></li>
+<li>union: <tt class="docutils literal">s1 | s2</tt></li>
+<li>difference: <tt class="docutils literal">s1 - s2</tt></li>
+<li>symmetric difference: <tt class="docutils literal">s1 ^ s2</tt></li>
+<li>Subset/Superset: <tt class="docutils literal">s1 &lt; s2</tt></li>
+</ul>
+</div>
+<div class="slide" id="examples">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id16">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id17">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 2, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id18">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 2, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id19">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 2, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id20">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 2, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>    <span class="c"># False</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre>
+</div>
+<div class="slide" id="id21">
+<h1>Examples</h1>
+<pre class="code python literal-block">
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {2}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">|</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 2, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">^</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span> <span class="c"># {1, 3}</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>    <span class="c"># False</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">&lt;</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="c"># True</span>
+</pre>
+</div>
+<div class="slide" id="frozenset">
+<h1><tt class="docutils literal">frozenset</tt></h1>
+<p>Like a set, but immutable.</p>
+</div>
+<div class="slide" id="why">
+<h1>Why?</h1>
+<p>Making it immutable makes it hashable.</p>
+<p>This means we can use it as the key of a dictionnary.</p>
+<p>Or put it in another set/frozenset.</p>
+</div>
+<div class="slide" id="id22">
+<h1>Why?</h1>
+<p>Making it immutable makes it hashable.</p>
+<p>This means we can use it as the key of a dictionnary.</p>
+<p>Or put it in another set/frozenset.</p>
+<p><em>(Yo Dawg, I heard you like sets...)</em></p>
+</div>
+<div class="slide" id="id23">
+<h1>Table of content</h1>
+<ul class="simple">
+<li>Builtin functions</li>
+<li><strong>Little-known usage of common builtins</strong></li>
+<li>Little-known modules</li>
+</ul>
+</div>
+<div class="slide" id="part-2-builtins-with-a-twist">
+<h1>Part 2: Builtins with a twist</h1>
+<div class="fullheight container">
+<ul class="simple">
+<li><tt class="docutils literal">next</tt>'s second parameter</li>
+<li><tt class="docutils literal">iter</tt>'s second parameter</li>
+<li>Imaginary friends</li>
+</ul>
+</div>
+</div>
+<div class="slide" id="iter">
+<h1><tt class="docutils literal">iter</tt></h1>
+<p>Make an <strong>iterator</strong> out of an <strong>iterable</strong>.</p>
+</div>
+<div class="slide" id="iterator-vs-iterable">
+<h1>Iterator vs. Iterable</h1>
+<dl class="docutils">
+<dt><strong>Iterable</strong></dt>
+<dd>An object that can be iterated over (<tt class="docutils literal">for x in y</tt>)</dd>
+<dt><strong>Iterator</strong></dt>
+<dd>A type of iterable that can only go forward (no rewinding).</dd>
+</dl>
+</div>
+<div class="slide" id="id24">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id25">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id26">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+</pre>
+</div>
+<div class="slide" id="id27">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id28">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+</pre>
+</div>
+<div class="slide" id="example-2">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id29">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id30">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+</pre>
+</div>
+<div class="slide" id="id31">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id32">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+<span class="s">'ABC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span>
+<span class="s">''</span>
+</pre>
+</div>
+<div class="slide" id="the-twist">
+<h1>The Twist</h1>
+<p>If you pass a second argument, <tt class="docutils literal">iter</tt> behaves quite differently.</p>
+<pre class="code python literal-block">
+<span class="nb">iter</span><span class="p">(</span><span class="nb">callable</span><span class="p">,</span> <span class="n">sentinel</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="iter-callable-sentinel">
+<h1><tt class="docutils literal">iter(callable, sentinel)</tt></h1>
+<p>Call the first argument yielding the return value
+and stopping when the sentinel value is reached
+(or when the call raises <tt class="docutils literal">StopIteration</tt>).</p>
+</div>
+<div class="slide" id="id33">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mydata.txt'</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="s">'STOP</span><span class="se">\n</span><span class="s">'</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id34">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'mydata.txt'</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="s">'STOP</span><span class="se">\n</span><span class="s">'</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="c"># Print all lines and stop when</span>
+<span class="c"># reading the one containing &quot;STOP&quot;</span>
+</pre>
+</div>
+<div class="slide" id="id35">
+<h1>Example (2)</h1>
+<pre class="code python literal-block">
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+<span class="k">def</span> <span class="nf">roll</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">roll</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c"># []</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">roll</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c"># [4, 4, 1]</span>
+</pre>
+</div>
+<div class="slide" id="net">
+<h1><tt class="docutils literal">ne×t</tt></h1>
+<p>Advance an iterator and return the value.</p>
+<p>Raise <tt class="docutils literal">StopIteration</tt> if empty.</p>
+</div>
+<div class="slide" id="id36">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id37">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id38">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'b'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id39">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'b'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'c'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id40">
+<h1>Example</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'b'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># 'c'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c"># StopIteration</span>
+</pre>
+</div>
+<div class="slide" id="id41">
+<h1>The Twist</h1>
+<p><tt class="docutils literal">next</tt> takes a second argument.</p>
+<p>Similar to <tt class="docutils literal">dict.get</tt>, it's a value to return if the iterator is empty
+(instead of raising <tt class="docutils literal">StopIteration</tt>).</p>
+</div>
+<div class="slide" id="example-part-2">
+<h1>Example (part 2)</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'b'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'c'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id42">
+<h1>Example (part 2)</h1>
+<pre class="code python literal-block">
+<span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="s">'abc'</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'a'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'b'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'c'</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="c"># 'x'</span>
+</pre>
+</div>
+<div class="slide" id="imaginary-friends">
+<h1>Imaginary friends</h1>
+<p><em>I hope you've studied your maths lesson for this one...</em></p>
+</div>
+<div class="slide" id="complex-numbers">
+<h1>Complex numbers</h1>
+<p>Did you know that python has first class support for complex numbers?</p>
+<pre class="code python literal-block">
+<span class="n">a</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span>     <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id43">
+<h1>Complex numbers</h1>
+<p>Did you know that python has first class support for complex numbers?</p>
+<pre class="code python literal-block">
+<span class="n">a</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span>     <span class="c"># complex(5, 3)</span>
+</pre>
+</div>
+<div class="slide" id="id44">
+<h1>Complex numbers</h1>
+<p>Did you know that python has first class support for complex numbers?</p>
+<pre class="code python literal-block">
+<span class="n">a</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span>     <span class="c"># complex(5, 3)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id45">
+<h1>Complex numbers</h1>
+<p>Did you know that python has first class support for complex numbers?</p>
+<pre class="code python literal-block">
+<span class="n">a</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span>     <span class="c"># complex(5, 3)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span> <span class="c"># complex(6, 3)</span>
+</pre>
+</div>
+<div class="slide" id="id46">
+<h1>The Twist</h1>
+<p>It also has imaginary number litterals:</p>
+<pre class="code python literal-block">
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span> <span class="c"># complex(1, 2)</span>
+</pre>
+</div>
+<div class="slide" id="id47">
+<h1>The Twist</h1>
+<p>It also has imaginary number litterals:</p>
+<pre class="code python literal-block">
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span>  <span class="c"># complex(1, 2)</span>
+<span class="mi">3j</span>      <span class="c"># complex(0, 3)</span>
+</pre>
+</div>
+<div class="slide" id="id48">
+<h1>The Twist</h1>
+<p>It also has imaginary number litterals:</p>
+<pre class="code python literal-block">
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span>  <span class="c"># complex(1, 2)</span>
+<span class="mi">3j</span>      <span class="c"># complex(0, 3)</span>
+<span class="mi">1j</span> <span class="o">**</span> <span class="mi">2</span> <span class="c"># ?</span>
+</pre>
+</div>
+<div class="slide" id="id49">
+<h1>The Twist</h1>
+<p>It also has imaginary number litterals:</p>
+<pre class="code python literal-block">
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span>  <span class="c"># complex(1, 2)</span>
+<span class="mi">3j</span>      <span class="c"># complex(0, 3)</span>
+<span class="mi">1j</span> <span class="o">**</span> <span class="mi">2</span> <span class="c"># -1</span>
+</pre>
+</div>
+<div class="slide" id="fun-with-maths">
+<h1>Fun with maths</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">pi</span>
+</pre>
+</div>
+<div class="slide" id="id50">
+<h1>Fun with maths</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">pi</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1j</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id51">
+<h1>Fun with maths</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">pi</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1j</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">1</span>
+</pre>
+</div>
+<div class="slide" id="id52">
+<h1>Fun with maths</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">pi</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1j</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mf">1.2246467991473532e-16j</span><span class="p">)</span>
+<span class="c"># Close enough :)</span>
+</pre>
+</div>
+<div class="slide" id="id53">
+<h1>Table of content</h1>
+<ul class="simple">
+<li>Builtin functions</li>
+<li>Little-known usage of common builtins</li>
+<li><strong>Little-known modules</strong></li>
+</ul>
+</div>
+<div class="slide" id="part-3-exotic-stdlib-modules">
+<h1>Part 3: Exotic Stdlib Modules</h1>
+<div class="fullheight container">
+Python ships with more than 300 modules in its standard library.</div>
+</div>
+<div class="slide" id="python-m-foo">
+<h1><tt class="docutils literal">python <span class="pre">-m</span> FOO</tt></h1>
+<p>Looks for a <tt class="docutils literal">FOO.py</tt> file on your python path and executes it.</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;print('Hello')&quot;</span> &gt; FOO.py
+<span class="nv">$ </span>python -m FOO
+Hello
+</pre>
+</div>
+<div class="slide" id="easter-eggs">
+<h1>Easter eggs</h1>
+<p><tt class="docutils literal">python <span class="pre">-m</span> this</tt></p>
+<p><tt class="docutils literal">python <span class="pre">-m</span> __hello__</tt></p>
+<p><tt class="docutils literal">python <span class="pre">-m</span> antigravity</tt></p>
+</div>
+<div class="slide" id="utilities">
+<h1>Utilities</h1>
+<p>Some standard modules are written in a way that they can be used as standalone
+programs (not just imported).</p>
+<p>Uses the &quot;trick&quot;:</p>
+<pre class="literal-block">
+if __name__ == '__main__':
+    # Put code here
+</pre>
+</div>
+<div class="slide" id="share-a-directory-over-the-network">
+<h1>Share a directory over the network?</h1>
+</div>
+<div class="slide" id="id54">
+<h1>Share a directory over the network?</h1>
+<pre class="code bash literal-block">
+python -m http.server
+</pre>
+<p>Browse and dowload files from the current directory (on port 8000 by default).</p>
+</div>
+<div class="slide" id="id55">
+<h1>Share a directory over the network?</h1>
+<pre class="code bash literal-block">
+python -m http.server
+python2 -m SimpleHTTPServer
+</pre>
+<p>Browse and dowload files from the current directory (on port 8000 by default).</p>
+</div>
+<div class="slide" id="let-s-play">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">43</span>
+</pre>
+</div>
+<div class="slide" id="id56">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id57">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id58">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="mi">42</span>
+</pre>
+</div>
+<div class="slide" id="id59">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id60">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">'Foo'</span> <span class="nb">object</span> <span class="n">has</span>
+ <span class="n">no</span> <span class="n">attribute</span> <span class="s">'bar'</span>
+</pre>
+</div>
+<div class="slide" id="id61">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">'Foo'</span> <span class="nb">object</span> <span class="n">has</span>
+ <span class="n">no</span> <span class="n">attribute</span> <span class="s">'bar'</span>
+<span class="c"># WAT!?</span>
+</pre>
+</div>
+<div class="slide" id="id62">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">43</span>
+</pre>
+</div>
+<div class="slide" id="id63">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="o">....</span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">........</span><span class="k">return</span> <span class="mi">42</span>
+
+<span class="o">---&gt;</span><span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">---&gt;---&gt;</span><span class="k">return</span> <span class="mi">43</span>
+</pre>
+</div>
+<div class="slide" id="id64">
+<h1>Let's play</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+        <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">43</span>
+</pre>
+</div>
+<div class="slide" id="tab-nanny-to-the-rescue">
+<h1>Tab Nanny to the rescue!</h1>
+<pre class="code bash literal-block">
+python -m tabnanny your_file.py
+</pre>
+</div>
+<div class="slide" id="print-a-calendar-of-the-current-year">
+<h1>Print a calendar of the current year?</h1>
+</div>
+<div class="slide" id="id65">
+<h1>Print a calendar of the current year?</h1>
+<pre class="code bash literal-block">
+python -m calendar
+</pre>
+</div>
+<div class="slide" id="id66">
+<h1>Print a calendar of the current year?</h1>
+<pre class="code bash literal-block">
+python -m calendar
+python -m calendar 2015
+</pre>
+</div>
+<div class="slide" id="id67">
+<h1>Print a calendar of the current year?</h1>
+<pre class="code bash literal-block">
+python -m calendar
+python -m calendar 2015 10
+</pre>
+</div>
+<div class="slide" id="encode-a-file-in-base64">
+<h1>Encode a file in base64?</h1>
+</div>
+<div class="slide" id="id68">
+<h1>Encode a file in base64?</h1>
+<pre class="code bash literal-block">
+python -m base64 some_file
+</pre>
+</div>
+<div class="slide" id="open-a-url-in-the-browser">
+<h1>Open a URL in the browser?</h1>
+</div>
+<div class="slide" id="id69">
+<h1>Open a URL in the browser?</h1>
+<pre class="code bash literal-block">
+python -m webbrowser <span class="se">\
+</span>    <span class="s2">&quot;http://google.pl&quot;</span>
+</pre>
+</div>
+<div class="slide" id="get-documentation-for-a-function">
+<h1>Get documentation for a function?</h1>
+</div>
+<div class="slide" id="id70">
+<h1>Get documentation for a function?</h1>
+<pre class="code bash literal-block">
+python -m pydoc str.find
+python -m pydoc <span class="se">\
+</span>    yourmodule.yourfunction
+</pre>
+</div>
+<div class="slide" id="list-of-functions-in-a-file">
+<h1>List of functions in a file?</h1>
+</div>
+<div class="slide" id="id71">
+<h1>List of functions in a file?</h1>
+<pre class="code bash literal-block">
+python -m pyclbr your_file.py
+python -m pyclbr modulename
+</pre>
+</div>
+<div class="slide" id="id72">
+<h1>List of functions in a file?</h1>
+<pre class="code bash literal-block">
+python -m pyclbr your_file.py
+python -m pyclbr modulename
+</pre>
+<p>Safe to run on arbitrary files.</p>
+</div>
+<div class="slide" id="batteries-included">
+<h1>Batteries Included</h1>
+<p>An arbitrary selection of useful modules,</p>
+<p>for use in python code.</p>
+</div>
+<div class="slide" id="parsing-csv">
+<h1>Parsing CSV?</h1>
+<pre class="code python bad literal-block">
+ <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'file.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+         <span class="n">row</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-csv">
+<h1><tt class="docutils literal">import csv</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">csv</span>
+ <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'file.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="leap-years">
+<h1>Leap Years</h1>
+<pre class="code python bad literal-block">
+ <span class="k">def</span> <span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre>
+</div>
+<div class="slide" id="id73">
+<h1>Leap Years</h1>
+<pre class="code python bad literal-block">
+ <span class="k">def</span> <span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+ <span class="c"># Hmm... wait</span>
+</pre>
+</div>
+<div class="slide" id="id74">
+<h1>Leap Years</h1>
+<pre class="code python bad literal-block">
+ <span class="k">def</span> <span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> \
+         <span class="ow">and</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+ <span class="c"># Aah, that's better</span>
+</pre>
+</div>
+<div class="slide" id="id75">
+<h1>Leap Years</h1>
+<pre class="code python bad literal-block">
+ <span class="k">def</span> <span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> \
+         <span class="ow">and</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+ <span class="c"># ... or is it?</span>
+</pre>
+</div>
+<div class="slide" id="import-calendar">
+<h1><tt class="docutils literal">import calendar</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">calendar</span>
+ <span class="n">calendar</span><span class="o">.</span><span class="n">isleap</span><span class="p">(</span><span class="mi">2013</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="prompting-for-a-password">
+<h1>Prompting for a password</h1>
+<pre class="code python bad literal-block">
+ <span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Password: &quot;</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-getpass">
+<h1><tt class="docutils literal">import getpass</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">from</span> <span class="nn">getpass</span> <span class="kn">import</span> <span class="n">getpass</span>
+ <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="alphabet">
+<h1>Alphabet</h1>
+<pre class="code python bad literal-block">
+ <span class="n">s</span> <span class="o">=</span> <span class="s">'abcdefghijklmnoprstuvwxyz'</span>
+ <span class="n">s</span> <span class="o">=</span> <span class="s">'0123456789'</span>
+</pre>
+</div>
+<div class="slide" id="import-string">
+<h1><tt class="docutils literal">import string</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">string</span>
+ <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
+ <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span>
+ <span class="n">string</span><span class="o">.</span><span class="n">digits</span>
+ <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
+ <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span>
+</pre>
+</div>
+<div class="slide" id="temporary-files">
+<h1>Temporary Files</h1>
+<pre class="code python bad literal-block">
+ <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span> <span class="k">as</span> <span class="n">ch</span>
+ <span class="n">S</span> <span class="o">=</span> <span class="s">'abcdefghjklmnopqrstuvwxyz'</span>
+ <span class="n">name</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+     <span class="n">ch</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+ <span class="n">path</span> <span class="o">=</span> <span class="s">'/tmp/</span><span class="si">%s</span><span class="s">'</span> <span class="o">%</span> <span class="n">name</span>
+ <span class="n">temp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-tempfile">
+<h1><tt class="docutils literal">import tempfile</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">tempfile</span>
+ <span class="n">temp</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryFile</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="passing-files-to-a-program">
+<h1>Passing files to a program</h1>
+<pre class="code python bad literal-block">
+ <span class="kn">import</span> <span class="nn">sys</span>
+ <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+         <span class="n">process</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-fileinput">
+<h1><tt class="docutils literal">import fileinput</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">fileinput</span>
+ <span class="n">lines</span> <span class="o">=</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">fileinput</span><span class="p">()</span>
+ <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+     <span class="n">process</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id76">
+<h1><tt class="docutils literal">import fileinput</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">fileinput</span>
+ <span class="n">lines</span> <span class="o">=</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">fileinput</span><span class="p">()</span>
+ <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+     <span class="n">process</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+ <span class="c"># It even supports - for STDIN</span>
+</pre>
+</div>
+<div class="slide" id="wrapping-text">
+<h1>Wrapping text</h1>
+<pre class="code python bad literal-block">
+ <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">80</span>
+ <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">80</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">80</span><span class="p">])</span>
+</pre>
+</div>
+<div class="slide" id="import-textwrap">
+<h1><tt class="docutils literal">import textwrap</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">textwrap</span>
+ <span class="n">lines</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">text</span><span class="p">,</span>
+     <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+</pre>
+</div>
+<div class="slide" id="id77">
+<h1><tt class="docutils literal">import textwrap</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">textwrap</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">text</span><span class="p">,</span>
+     <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">))</span>
+</pre>
+</div>
+<div class="slide" id="python-keywords">
+<h1>Python Keywords</h1>
+<pre class="code python bad literal-block">
+ <span class="n">kw</span> <span class="o">=</span> <span class="p">[</span><span class="s">'class'</span><span class="p">,</span> <span class="s">'for'</span><span class="p">,</span> <span class="s">'if'</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre>
+</div>
+<div class="slide" id="import-keyword">
+<h1><tt class="docutils literal">import keyword</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">keyword</span>
+ <span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span>
+</pre>
+</div>
+<div class="slide" id="id78">
+<h1><tt class="docutils literal">import keyword</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">keyword</span>
+ <span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span>
+ <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s">'class'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="unicode">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id79">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+<span class="c"># &lt;insert joke about angular.js&gt;</span>
+</pre>
+</div>
+<div class="slide" id="id80">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\x01</span><span class="s">05t'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id81">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\x01</span><span class="s">05t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\u0105</span><span class="s">t'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id82">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\x01</span><span class="s">05t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\u0105</span><span class="s">t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\U00000105</span><span class="s">t'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id83">
+<h1>Unicode</h1>
+<pre class="code python literal-block">
+<span class="k">print</span><span class="p">(</span><span class="s">'Kąt'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\x01</span><span class="s">05t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\u0105</span><span class="s">t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K</span><span class="se">\U00000105</span><span class="s">t'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'K\N{LATIN SMALL LETTER A</span><span class="se">\
+</span><span class="s"> WITH OGONEK}t'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-unicodedata">
+<h1><tt class="docutils literal">import unicodedata</tt></h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">unicodedata</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">name</span><span class="p">,</span> <span class="n">lookup</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name</span><span class="p">(</span><span class="s">'ą'</span><span class="p">)</span>
+<span class="s">'LATIN SMALL LETTER A WITH OGONEK'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lookup</span><span class="p">(</span><span class="s">'LATIN SMALL LETTER A '</span>
+<span class="o">...</span>        <span class="s">'WITH OGONEK'</span><span class="p">)</span>
+<span class="s">'ą'</span>
+</pre>
+</div>
+<div class="slide" id="listing-files">
+<h1>Listing Files</h1>
+<pre class="code python bad literal-block">
+ <span class="kn">import</span> <span class="nn">os</span>
+ <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">'.'</span><span class="p">):</span>
+     <span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">'.txt'</span><span class="p">):</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="import-glob">
+<h1><tt class="docutils literal">import glob</tt></h1>
+<pre class="code python good literal-block">
+ <span class="kn">import</span> <span class="nn">glob</span>
+ <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'*.txt'</span><span class="p">):</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="and-many-more">
+<h1>And many more</h1>
+<p><tt class="docutils literal">colorsys</tt>,
+<tt class="docutils literal">difflib</tt>,
+<tt class="docutils literal">fractions</tt>,
+<tt class="docutils literal">fnmatch</tt>,
+<tt class="docutils literal">robotparser</tt>,
+<tt class="docutils literal">wave</tt>,
+<tt class="docutils literal">shlex</tt>,
+<tt class="docutils literal">contextlib</tt>,
+<tt class="docutils literal">inspect</tt>,
+...</p>
+</div>
+<div class="slide" id="id84">
+<h1>Table of content</h1>
+<ul class="simple">
+<li>Builtin functions</li>
+<li>Little-known usage of common builtins</li>
+<li>Little-known modules</li>
+</ul>
+</div>
+<div class="slide" id="tldl">
+<h1>TLDL;</h1>
+<div class="fullheight container">
+<p>Python is awesome.</p>
+<p>Go look in your <tt class="docutils literal">/usr/lib/python/</tt>, see what you can find.</p>
+</div>
+</div>
+<div class="slide" id="dziekuje">
+<h1>Dziękuję!</h1>
+<div class="fullheight container">
+Pytania?</div>
+</div>
+</div>
+</body>
+</html>
