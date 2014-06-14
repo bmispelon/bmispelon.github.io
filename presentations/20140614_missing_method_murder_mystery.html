@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>A Pythonic Crime Story</title>
+<style type="text/css">
+
+.hll { background-color: #ffffcc }
+.c { color: #228B22 } /* Comment */
+.err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.k { color: #8B008B; font-weight: bold } /* Keyword */
+.cm { color: #228B22 } /* Comment.Multiline */
+.cp { color: #1e889b } /* Comment.Preproc */
+.c1 { color: #228B22 } /* Comment.Single */
+.cs { color: #8B008B; font-weight: bold } /* Comment.Special */
+.gd { color: #aa0000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #aa0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00aa00 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #555555 } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #aa0000 } /* Generic.Traceback */
+.kc { color: #8B008B; font-weight: bold } /* Keyword.Constant */
+.kd { color: #8B008B; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #8B008B; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #8B008B; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #8B008B; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #a7a7a7; font-weight: bold } /* Keyword.Type */
+.m { color: #B452CD } /* Literal.Number */
+.s { color: #CD5555 } /* Literal.String */
+.na { color: #658b00 } /* Name.Attribute */
+.nb { color: #658b00 } /* Name.Builtin */
+.nc { color: #008b45; font-weight: bold } /* Name.Class */
+.no { color: #00688B } /* Name.Constant */
+.nd { color: #707a7c } /* Name.Decorator */
+.ne { color: #008b45; font-weight: bold } /* Name.Exception */
+.nf { color: #008b45 } /* Name.Function */
+.nn { color: #008b45; text-decoration: underline } /* Name.Namespace */
+.nt { color: #8B008B; font-weight: bold } /* Name.Tag */
+.nv { color: #00688B } /* Name.Variable */
+.ow { color: #8B008B } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #B452CD } /* Literal.Number.Float */
+.mh { color: #B452CD } /* Literal.Number.Hex */
+.mi { color: #B452CD } /* Literal.Number.Integer */
+.mo { color: #B452CD } /* Literal.Number.Oct */
+.sb { color: #CD5555 } /* Literal.String.Backtick */
+.sc { color: #CD5555 } /* Literal.String.Char */
+.sd { color: #CD5555 } /* Literal.String.Doc */
+.s2 { color: #CD5555 } /* Literal.String.Double */
+.se { color: #CD5555 } /* Literal.String.Escape */
+.sh { color: #1c7e71; font-style: italic } /* Literal.String.Heredoc */
+.si { color: #CD5555 } /* Literal.String.Interpol */
+.sx { color: #cb6c20 } /* Literal.String.Other */
+.sr { color: #1c7e71 } /* Literal.String.Regex */
+.s1 { color: #CD5555 } /* Literal.String.Single */
+.ss { color: #CD5555 } /* Literal.String.Symbol */
+.bp { color: #658b00 } /* Name.Builtin.Pseudo */
+.vc { color: #00688B } /* Name.Variable.Class */
+.vg { color: #00688B } /* Name.Variable.Global */
+.vi { color: #00688B } /* Name.Variable.Instance */
+.il { color: #B452CD } /* Literal.Number.Integer.Long */
+
+</style>
+<style type="text/css">
+
+.floatleft {
+    float: left;
+    margin-right: 4%;
+}
+.fullheight {
+    /* For a page height of 768px */
+    /* height: 632px; */
+    height: 2000px;
+}
+.strike {
+    text-decoration: line-through;
+}
+.external:after {
+    content: "" !important; /* Remove stuff after <a> */
+}
+
+.current {
+    color: #000 !important;
+}
+
+strong {
+    color: #092E20;
+}
+
+#slide0 {
+    background: #092E20;
+    color: #fff;
+}
+#slide0 .container {
+    /* For a page height of 768px */
+    /* height: 412px; */
+}
+
+#disclaimer,
+#anti-t-protection,
+#grazie {
+    background: #092E20;
+    color: #fff;
+}
+
+#disclaimer h1,
+#anti-t-protection h1,
+#grazie h1 {
+    margin-bottom: 156px;
+}
+
+#disclaimer .incremental {
+    color: #092E20;
+}
+#disclaimer .current {
+    color: #fff !important;
+}
+
+#anti-t-protection h1 tt {
+    color: inherit;
+    background: none;
+}
+#grazie strong {
+    color: #fff;
+}
+
+.fakepic {
+    display: block;
+    height: 4em;
+    width: 3em;
+    margin: 0 auto;
+    border: 5px solid #092E20;
+    color: #fff;
+    overflow: hidden;
+}
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/medium-white/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/medium-white/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/medium-white/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/medium-white/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/medium-white/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>A Pythonic Crime Story</h1>
+
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">A Pythonic Crime Story</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<div class="fullheight container">
+The Missing Murdered Method Mystery</div>
+
+</div>
+<div class="slide" id="disclaimer">
+<h1>Disclaimer</h1>
+<div class="fullheight container">
+<p class="incremental">Inspired by real events.</p>
+<p class="incremental">Names have been changed to protect the innocents.</p>
+</div>
+</div>
+<div class="slide" id="the-setup">
+<h1>The Setup</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="unfolding-the-tragedy">
+<h1>Unfolding The Tragedy</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id1">
+<h1>Unfolding The Tragedy</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id2">
+<h1>Unfolding The Tragedy</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="n">hello</span>
+</pre>
+</div>
+<div class="slide" id="id3">
+<h1>Unfolding The Tragedy</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="n">hello</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id4">
+<h1>Unfolding The Tragedy</h1>
+<pre class="code python literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<span class="n">hello</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">'Foo'</span> <span class="nb">object</span> <span class="n">has</span>
+ <span class="n">no</span> <span class="n">attribute</span> <span class="s">'bar'</span>
+<span class="c"># MURDER!</span>
+</pre>
+</div>
+<div class="slide" id="back-to-the-crime-scene">
+<h1>Back To The Crime Scene</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c"># MISSING</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span> <span class="c"># METHOD</span>
+</pre>
+</div>
+<div class="slide" id="video-surveillance">
+<h1>Video Surveillance</h1>
+<p>Thanks to a well-placed logger, we managed to get a picture of the killer:</p>
+<p class="fakepic">&lt;blank&gt;</p>
+</div>
+<div class="slide" id="interpol-file">
+<h1>Interpol File</h1>
+<ul class="incremental simple">
+<li><strong>Last Name</strong>: T.</li>
+<li><strong>First Name</strong>: Beksleš</li>
+<li><strong>Favorite Number</strong>: 9</li>
+<li><strong>Known aliases</strong>: <tt class="docutils literal">\t</tt>, <tt class="docutils literal">\x09</tt>, Tabbie</li>
+</ul>
+</div>
+<div class="slide" id="python-quizz-time">
+<h1>Python Quizz Time!</h1>
+<p class="incremental"><strong>Question</strong>: How many spaces in a tab?</p>
+<p class="incremental"><strong>Answer</strong>: 8</p>
+</div>
+<div class="slide" id="how-did-t-do-it">
+<h1>How Did <tt class="docutils literal">\t</tt> Do It?</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id5">
+<h1>How Did <tt class="docutils literal">\t</tt> Do It?</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="o">....</span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">........</span><span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+<span class="o">---&gt;</span><span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">---&gt;---&gt;</span><span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="what-python-sees">
+<h1>What Python Sees</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+        <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">43</span>
+</pre>
+</div>
+<div class="slide" id="id6">
+<h1>What Python Sees</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+        <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    <span class="c"># DEAD</span>
+                <span class="k">return</span> <span class="mi">43</span> <span class="c"># CODE</span>
+</pre>
+</div>
+<div class="slide" id="anti-t-protection">
+<h1>Anti-<tt class="docutils literal">\t</tt> Protection?</h1>
+<div class="fullheight container">
+What can you do?</div>
+</div>
+<div class="slide" id="learn-your-editor">
+<h1>1 - Learn Your <tt class="docutils literal">$EDITOR</tt></h1>
+<p>Python has &quot;significant whitespace&quot;.</p>
+<p>Highlight it!</p>
+</div>
+<div class="slide" id="transform-this">
+<h1>Transform This...</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="into-this">
+<h1>... Into This!</h1>
+<pre class="code python literal-block">
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="o">....</span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">........</span><span class="k">print</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+
+<span class="o">---&gt;</span><span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">---&gt;---&gt;</span><span class="k">print</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="ask-your-nanny">
+<h1>2 - Ask Your Nanny</h1>
+<pre class="code bash incremental literal-block">
+<span class="nv">$ </span>python -m tabnanny file.py
+</pre>
+<pre class="code text incremental literal-block">
+file.py 4 '\tdef bar(self):\n'
+</pre>
+</div>
+<div class="slide" id="stop-living-in-the-past">
+<h1>3 - Stop Living in the Past</h1>
+<p>Python 3 complains loudly when you try running a file with mixed tabs and spaces.</p>
+<p><strong>Start using Python 3</strong></p>
+</div>
+<div class="slide" id="can-t-use-python-3">
+<h1>Can't use Python 3?</h1>
+<pre class="code bash literal-block">
+python2 -t file.py   <span class="c"># Warnings
+</span>python2 -tt file.py  <span class="c"># Errors</span>
+</pre>
+</div>
+<div class="slide" id="moral-of-the-story">
+<h1>Moral Of The Story</h1>
+<p class="incremental">Friends don't let friends mix tabs and spaces.</p>
+<p class="incremental">Friends tell their friends to use Python 3.</p>
+<p class="incremental"><strong>So use Python 3!</strong></p>
+</div>
+<div class="slide" id="grazie">
+<h1>Grazie!</h1>
+<div class="fullheight container">
+<p>Questions/Remarks?</p>
+<p><strong>&#64;bmispelon</strong></p>
+</div>
+</div>
+</div>
+</body>
+</html>
