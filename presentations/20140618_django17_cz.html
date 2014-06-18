@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>What's new in Django 1.7?</title>
+<style type="text/css">
+
+.hll { background-color: #ffffcc }
+.c { color: #228B22 } /* Comment */
+.err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.k { color: #8B008B; font-weight: bold } /* Keyword */
+.cm { color: #228B22 } /* Comment.Multiline */
+.cp { color: #1e889b } /* Comment.Preproc */
+.c1 { color: #228B22 } /* Comment.Single */
+.cs { color: #8B008B; font-weight: bold } /* Comment.Special */
+.gd { color: #aa0000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #aa0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00aa00 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #555555 } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #aa0000 } /* Generic.Traceback */
+.kc { color: #8B008B; font-weight: bold } /* Keyword.Constant */
+.kd { color: #8B008B; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #8B008B; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #8B008B; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #8B008B; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #a7a7a7; font-weight: bold } /* Keyword.Type */
+.m { color: #B452CD } /* Literal.Number */
+.s { color: #CD5555 } /* Literal.String */
+.na { color: #658b00 } /* Name.Attribute */
+.nb { color: #658b00 } /* Name.Builtin */
+.nc { color: #008b45; font-weight: bold } /* Name.Class */
+.no { color: #00688B } /* Name.Constant */
+.nd { color: #707a7c } /* Name.Decorator */
+.ne { color: #008b45; font-weight: bold } /* Name.Exception */
+.nf { color: #008b45 } /* Name.Function */
+.nn { color: #008b45; text-decoration: underline } /* Name.Namespace */
+.nt { color: #8B008B; font-weight: bold } /* Name.Tag */
+.nv { color: #00688B } /* Name.Variable */
+.ow { color: #8B008B } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #B452CD } /* Literal.Number.Float */
+.mh { color: #B452CD } /* Literal.Number.Hex */
+.mi { color: #B452CD } /* Literal.Number.Integer */
+.mo { color: #B452CD } /* Literal.Number.Oct */
+.sb { color: #CD5555 } /* Literal.String.Backtick */
+.sc { color: #CD5555 } /* Literal.String.Char */
+.sd { color: #CD5555 } /* Literal.String.Doc */
+.s2 { color: #CD5555 } /* Literal.String.Double */
+.se { color: #CD5555 } /* Literal.String.Escape */
+.sh { color: #1c7e71; font-style: italic } /* Literal.String.Heredoc */
+.si { color: #CD5555 } /* Literal.String.Interpol */
+.sx { color: #cb6c20 } /* Literal.String.Other */
+.sr { color: #1c7e71 } /* Literal.String.Regex */
+.s1 { color: #CD5555 } /* Literal.String.Single */
+.ss { color: #CD5555 } /* Literal.String.Symbol */
+.bp { color: #658b00 } /* Name.Builtin.Pseudo */
+.vc { color: #00688B } /* Name.Variable.Class */
+.vg { color: #00688B } /* Name.Variable.Global */
+.vi { color: #00688B } /* Name.Variable.Instance */
+.il { color: #B452CD } /* Literal.Number.Integer.Long */
+
+</style>
+<style type="text/css">
+
+.floatleft {
+    float: left;
+    margin-right: 4%;
+}
+.fullheight {
+    /* For a page height of 768px */
+    /* height: 632px; */
+    height: 2000px;
+}
+.strike {
+    text-decoration: line-through;
+}
+.external:after {
+    content: "" !important; /* Remove stuff after <a> */
+}
+
+.current {
+    color: #000 !important;
+}
+
+strong {
+    color: #092E20;
+}
+
+#slide0 {
+    background: #092E20;
+    color: #fff;
+}
+
+#django-db-migrations,
+#django-apps,
+#queryset-as-manager,
+#django-db-models-lookup,
+#models-prefetch,
+#manage-py-check,
+#dekuju {
+    background: #092E20;
+    color: #fff;
+    text-align: center;
+}
+
+#django-db-migrations h1,
+#django-apps h1,
+#queryset-as-manager h1,
+#django-db-models-lookup h1,
+#models-prefetch h1,
+#manage-py-check h1,
+#dekuju h1 {
+    margin-bottom: 2em;
+}
+
+h1 tt,
+.fullheight tt {
+    background: inherit !important;
+}
+
+
+pre.smallcode {
+    font-size: 50% !important;
+}
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/medium-white/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/medium-white/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/medium-white/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/medium-white/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/medium-white/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>What's new in Django 1.7?</h1>
+
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">What's new in Django 1.7?</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<div class="fullheight container">
+A quick look at the new features of Django's upcoming release</div>
+
+</div>
+<div class="slide" id="about-me">
+<h1>About me</h1>
+<img alt="baptiste.jpg" class="floatleft" src="baptiste.jpg" />
+<p><strong>Baptiste Mispelon</strong></p>
+<p>Online: <tt class="docutils literal">bmispelon</tt></p>
+<p>Web developer</p>
+<p>Django core dev since June 2013</p>
+</div>
+<div class="slide" id="about-this-talk">
+<h1>About this talk</h1>
+<ol class="arabic simple">
+<li><tt class="docutils literal">./manage.py check</tt></li>
+<li><tt class="docutils literal">QuerySet.as_manager()</tt></li>
+<li><tt class="docutils literal">models.Prefetch</tt></li>
+<li><tt class="docutils literal">django.apps</tt></li>
+<li><tt class="docutils literal">django.db.migrations</tt></li>
+</ol>
+</div>
+<div class="slide" id="quick-note">
+<h1>Quick note</h1>
+<p>Support:</p>
+<ul class="simple">
+<li>Drop support for Django 1.5</li>
+<li>1.4 still supported (LTS)</li>
+<li>Drop support for Python 2.6 (only 2.7 and 3.2+)</li>
+</ul>
+</div>
+<div class="slide" id="manage-py-check">
+<h1><tt class="docutils literal">./manage.py check</tt></h1>
+<div class="fullheight container">
+System Checks Framework</div>
+</div>
+<div class="slide" id="gsoc">
+<h1>GSoC</h1>
+<p>The checks framework is the result of the work of Christopher Medrela during
+his participation in the Google Summer of Code 2013.</p>
+</div>
+<div class="slide" id="what-is-it">
+<h1>What is it?</h1>
+<p>It's a rewriting of the old <tt class="docutils literal">validate</tt> command to be more modular.</p>
+</div>
+<div class="slide" id="why">
+<h1>Why?</h1>
+<p>You can now write and register your own checks.</p>
+<p>You can ignore some of the warning and errors if you need to.</p>
+</div>
+<div class="slide" id="full-list">
+<h1>Full list</h1>
+<p>The full list is available in the documentation at
+<a class="reference external" href="https://docs.djangoproject.com/en/1.7/ref/checks/">https://docs.djangoproject.com/en/1.7/ref/checks/</a></p>
+</div>
+<div class="slide" id="queryset-as-manager">
+<h1><tt class="docutils literal">Queryset.as_manager()</tt></h1>
+<div class="fullheight container">
+Solving the <tt class="docutils literal">Manager</tt> vs <tt class="docutils literal">QuerySet</tt> issue</div>
+</div>
+<div class="slide" id="the-problem">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">()</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">confirmed</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id1">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">EventManager</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">confirmed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">confirmed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id2">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id3">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">EuroPython</span><span class="o">&gt;</span><span class="p">]</span>
+</pre>
+</div>
+<div class="slide" id="id4">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">EuroPython</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">]</span>
+</pre>
+</div>
+<div class="slide" id="id5">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">EuroPython</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id6">
+<h1>The problem</h1>
+<pre class="code python smallcode literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">EuroPython</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">'QuerySet'</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span>
+<span class="s">'confirmed'</span>
+</pre>
+</div>
+<div class="slide" id="id7">
+<h1><tt class="docutils literal">QuerySet.as_manager()</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">EventQueryset</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">QuerySet</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">confirmed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">confirmed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id8">
+<h1><tt class="docutils literal">QuerySet.as_manager()</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">EventQueryset</span><span class="o">.</span><span class="n">as_manager</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id9">
+<h1><tt class="docutils literal">QuerySet.as_manager()</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">EuroPython</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">'Prague'</span><span class="p">)</span><span class="o">.</span><span class="n">confirmed</span><span class="p">()</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Event</span><span class="p">:</span> <span class="n">Pyvo</span><span class="o">&gt;</span><span class="p">]</span>  <span class="c"># It works!</span>
+</pre>
+</div>
+<div class="slide" id="models-prefetch">
+<h1><tt class="docutils literal">models.Prefetch</tt></h1>
+<div class="fullheight container">
+<tt class="docutils literal">prefetch_related()</tt> improved</div>
+</div>
+<div class="slide" id="reminder-select-related">
+<h1>Reminder: <tt class="docutils literal">select_related</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Author</span><span class="p">,</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s">'books'</span><span class="p">)</span>
+    <span class="n">published</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
+</pre>
+</div>
+<div class="slide" id="id10">
+<h1>Reminder: <tt class="docutils literal">select_related</tt></h1>
+<pre class="code python literal-block">
+<span class="k">def</span> <span class="nf">list_books</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">books</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+        <span class="s">'books/list.html'</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">'books'</span><span class="p">:</span> <span class="n">books</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id11">
+<h1>Reminder: <tt class="docutils literal">select_related</tt></h1>
+<pre class="code jinja literal-block">
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">book</span> <span class="k">in</span> <span class="nv">books</span> <span class="cp">%}</span><span class="x">
+    Title: </span><span class="cp">{{</span> <span class="nv">book.title</span> <span class="cp">}}</span><span class="x">
+    Author: </span><span class="cp">{{</span> <span class="nv">book.author.name</span> <span class="cp">}}</span><span class="x">
+</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre>
+</div>
+<div class="slide" id="id12">
+<h1>Reminder: <tt class="docutils literal">select_related</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">def</span> <span class="nf">list_books</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">books</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s">'author'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+        <span class="s">'books/list.html'</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">'books'</span><span class="p">:</span> <span class="n">books</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id13">
+<h1>Reminder: <tt class="docutils literal">select_related</tt></h1>
+<pre class="code jinja literal-block">
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">book</span> <span class="k">in</span> <span class="nv">books</span> <span class="cp">%}</span><span class="x">
+    Title: </span><span class="cp">{{</span> <span class="nv">book.title</span> <span class="cp">}}</span><span class="x">
+    Author: </span><span class="cp">{{</span> <span class="nv">book.author.name</span> <span class="cp">}}</span><span class="x">
+</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre>
+</div>
+<div class="slide" id="reminder-prefetch-related">
+<h1>Reminder: <tt class="docutils literal">prefetch_related</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">def</span> <span class="nf">list_authors</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+        <span class="s">'books/authors.html'</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">'authors'</span><span class="p">:</span> <span class="n">authors</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id14">
+<h1>Reminder: <tt class="docutils literal">prefetch_related</tt></h1>
+<pre class="code jinja smallcode literal-block">
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">author</span> <span class="k">in</span> <span class="nv">authors</span> <span class="cp">%}</span><span class="x">
+    Name: </span><span class="cp">{{</span> <span class="nv">author.name</span> <span class="cp">}}</span><span class="x">
+    Books:
+        </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">book</span> <span class="k">in</span> <span class="nv">author.books.all</span> <span class="cp">%}</span><span class="x">
+            </span><span class="cp">{{</span> <span class="nv">book.title</span> <span class="cp">}}</span><span class="x">
+        </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">
+</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre>
+</div>
+<div class="slide" id="id15">
+<h1>Reminder: <tt class="docutils literal">prefetch_related</tt></h1>
+<pre class="code python smallcode literal-block">
+<span class="k">def</span> <span class="nf">list_authors</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s">'books'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+        <span class="s">'books/authors.html'</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">'authors'</span><span class="p">:</span> <span class="n">authors</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id16">
+<h1>Reminder: <tt class="docutils literal">prefetch_related</tt></h1>
+<pre class="code jinja smallcode literal-block">
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">author</span> <span class="k">in</span> <span class="nv">authors</span> <span class="cp">%}</span><span class="x">
+    Name: </span><span class="cp">{{</span> <span class="nv">author.name</span> <span class="cp">}}</span><span class="x">
+    Books:
+        </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">book</span> <span class="k">in</span> <span class="nv">author.books.all</span> <span class="cp">%}</span><span class="x">
+            </span><span class="cp">{{</span> <span class="nv">book.title</span> <span class="cp">}}</span><span class="x">
+        </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">
+</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre>
+</div>
+<div class="slide" id="prefetch-objects">
+<h1><tt class="docutils literal">Prefetch</tt> objects</h1>
+<pre class="code python literal-block">
+<span class="n">prefetch_related</span><span class="p">(</span><span class="s">'books'</span><span class="p">)</span>
+</pre>
+<p>is equivalent to</p>
+<pre class="code python literal-block">
+<span class="n">prefetch_related</span><span class="p">(</span>
+    <span class="n">Prefetch</span><span class="p">(</span><span class="s">'books'</span><span class="p">))</span>
+</pre>
+</div>
+<div class="slide" id="filtering-options">
+<h1>Filtering options</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">def</span> <span class="nf">list_authors</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">published_qs</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Prefetch</span><span class="p">(</span><span class="s">'books'</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">published_qs</span><span class="p">,</span>
+        <span class="n">to_attr</span><span class="o">=</span><span class="s">'published_books'</span><span class="p">)</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+        <span class="s">'books/authors.html'</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">'authors'</span><span class="p">:</span> <span class="n">authors</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id17">
+<h1>Filtering options</h1>
+<pre class="code jinja smallcode literal-block">
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">author</span> <span class="k">in</span> <span class="nv">authors</span> <span class="cp">%}</span><span class="x">
+    Name: </span><span class="cp">{{</span> <span class="nv">author.name</span> <span class="cp">}}</span><span class="x">
+    Published books:
+        </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">book</span> <span class="k">in</span> <span class="nv">author.published_books</span> <span class="cp">%}</span><span class="x">
+            </span><span class="cp">{{</span> <span class="nv">book.title</span> <span class="cp">}}</span><span class="x">
+        </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">
+</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre>
+</div>
+<div class="slide" id="django-apps">
+<h1><tt class="docutils literal">django.apps</tt></h1>
+<div class="fullheight container">
+A small feature that's much bigger on the inside</div>
+</div>
+<div class="slide" id="history">
+<h1>History</h1>
+<p>Started as ticket #3591 (&gt;7 years old):</p>
+<p><em>add support for custom app_label and verbose_name</em></p>
+</div>
+<div class="slide" id="feature-creep">
+<h1>Feature creep</h1>
+<p>Over the years, a lot of features get attached to this ticket.</p>
+<p>The scope gets bigger and bigger.</p>
+<p>Many people attempt a solution, but without success.</p>
+</div>
+<div class="slide" id="finally">
+<h1>Finally</h1>
+<p>Aymeric gets a new job and has some free time.</p>
+<p>He starts tackling the problem, reducing the scope as much as possible.</p>
+<p>He ends up committing a solution which solves most problems.</p>
+</div>
+<div class="slide" id="result">
+<h1>Result</h1>
+<pre class="code python smallcode literal-block">
+<span class="c"># myproject/apps.py</span>
+<span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">AppConfig</span>
+
+<span class="k">class</span> <span class="nc">MyAuthConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">'custom.auth'</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s">'myauth'</span>
+    <span class="n">verbose_name</span> <span class="o">=</span> <span class="s">&quot;My cool auth app&quot;</span>
+</pre>
+</div>
+<div class="slide" id="id18">
+<h1>Result</h1>
+<pre class="code python smallcode literal-block">
+<span class="c"># myproject/settings.py</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c"># Old format - backwards compatible</span>
+    <span class="s">'django.contrib.auth'</span><span class="p">,</span>
+    <span class="c"># New format - points to an AppConfig</span>
+    <span class="s">'myproject.apps.MyAuthConfig'</span><span class="p">,</span>
+<span class="p">]</span>
+</pre>
+</div>
+<div class="slide" id="django-s-startup-sequence">
+<h1>Django's startup sequence</h1>
+<p>The way Django loads your modules inside your project is now fully deterministic.</p>
+</div>
+<div class="slide" id="app-ready">
+<h1><tt class="docutils literal">app.ready</tt></h1>
+<p>There's now an entry point where you can put code that should be run when Django
+starts.</p>
+<p><tt class="docutils literal">AppConfig</tt> objects have a <tt class="docutils literal">ready</tt> method that is executed when Django starts.</p>
+</div>
+<div class="slide" id="goodies">
+<h1>Goodies</h1>
+<ul class="simple">
+<li>App names in the admin are now translated</li>
+<li>Empty model files are not needed anymore</li>
+<li><tt class="docutils literal">admin.autodiscover()</tt> can be removed from <tt class="docutils literal">urls.py</tt></li>
+</ul>
+</div>
+<div class="slide" id="breakage">
+<h1>Breakage</h1>
+<p class="incremental"><tt class="docutils literal">RuntimeError: App registry isn't ready yet.</tt></p>
+<p class="incremental">You need to add <tt class="docutils literal">django.setup()</tt> in external scripts.</p>
+<p class="incremental">Or maybe you're using <tt class="docutils literal">gettext</tt> when you should be using <tt class="docutils literal">gettext_lazy</tt>.</p>
+</div>
+<div class="slide" id="django-db-migrations">
+<h1><tt class="docutils literal">django.db.migrations</tt></h1>
+<div class="fullheight container">
+The killer feature of Django 1.7</div>
+</div>
+<div class="slide" id="south">
+<h1>South</h1>
+<ul class="simple">
+<li>Started 6 years ago</li>
+<li>One of the most popular 3rd-party apps</li>
+<li>De-facto standard</li>
+<li>Old code</li>
+</ul>
+</div>
+<div class="slide" id="kickstarter">
+<h1>Kickstarter</h1>
+<ul class="simple">
+<li>March 2013</li>
+<li>£2,500 goal</li>
+<li>Ended up raising £18,000</li>
+</ul>
+</div>
+<div class="slide" id="bye-bye-syncdb">
+<h1>Bye bye <tt class="docutils literal">syncdb</tt></h1>
+<p>2 new commands:</p>
+<ul class="simple">
+<li><tt class="docutils literal">makemigrations</tt></li>
+<li><tt class="docutils literal">migrate</tt></li>
+</ul>
+</div>
+<div class="slide" id="heads-up-custom-fields">
+<h1>Heads up: custom fields</h1>
+<p>Custom fields now need to implement a <tt class="docutils literal">deconstruct</tt> method.</p>
+<p>It's used when serializing the fields in a migration file.</p>
+</div>
+<div class="slide" id="example">
+<h1>Example</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">MyCustomField</span><span class="p">(</span><span class="n">CharField</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">custom_arg</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_arg</span> <span class="o">=</span> <span class="n">custom_arg</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre>
+</div>
+<div class="slide" id="id19">
+<h1>Example</h1>
+<pre class="code python smallcode literal-block">
+<span class="k">class</span> <span class="nc">MyCustomField</span><span class="p">(</span><span class="n">CharField</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">custom_arg</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_arg</span> <span class="o">=</span> <span class="n">custom_arg</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">deconstruct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> \
+            <span class="nb">super</span><span class="p">(</span><span class="n">MyCustomField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">deconstruct</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s">'custom_arg'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_arg</span>
+        <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span>
+</pre>
+</div>
+<div class="slide" id="summary">
+<h1>Summary</h1>
+<ol class="incremental arabic simple">
+<li><tt class="docutils literal">./manage.py check</tt></li>
+<li><tt class="docutils literal">QuerySet.as_manager()</tt></li>
+<li><tt class="docutils literal">models.Prefetch</tt></li>
+<li><tt class="docutils literal">django.apps</tt></li>
+<li><tt class="docutils literal">django.db.migrations</tt></li>
+<li>... and many more</li>
+</ol>
+</div>
+<div class="slide" id="release-notes">
+<h1>Release notes</h1>
+<p>Check the full list at <a class="reference external" href="https://docs.djangoproject.com/en/1.7/releases/1.7/">https://docs.djangoproject.com/en/1.7/releases/1.7/</a></p>
+</div>
+<div class="slide" id="dekuju">
+<h1>Děkuju!</h1>
+<div class="fullheight container">
+Otázky?</div>
+</div>
+</div>
+</body>
+</html>
